@@ -1,0 +1,116 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7pmqtaeidvhw"]
+
+[ext_resource type="Theme" uid="uid://bwqig88kcvpte" path="res://assets/GUI/gui_default_theme.tres" id="1_2jnla"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_35u0x"]
+[ext_resource type="Texture2D" uid="uid://dgxw7nltmfo60" path="res://assets/Background/Simple/Forest_1.png" id="2_rbqyo"]
+[ext_resource type="Texture2D" uid="uid://b5t86x0g7yx8v" path="res://assets/GUI/GUI_Rect.png" id="2_wfxtv"]
+[ext_resource type="FontFile" uid="uid://ybic0uytbk8e" path="res://assets/GUI/FsSongarak1Regular.ttf" id="4_ytkxx"]
+[ext_resource type="PackedScene" uid="uid://b3xbqylvxq7p4" path="res://scenes/alt_options_menu.tscn" id="6_60vy2"]
+
+[node name="Main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_35u0x")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rbqyo")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Logo" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -245.0
+offset_right = 260.0
+offset_bottom = -195.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Logo"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Logo/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("4_ytkxx")
+theme_override_font_sizes/font_size = 60
+text = "Legend of 4 seasons"
+horizontal_alignment = 1
+
+[node name="Menu" type="MarginContainer" parent="."]
+process_mode = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -85.5
+offset_right = 35.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuFrame" type="TextureRect" parent="Menu"]
+custom_minimum_size = Vector2(300, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_wfxtv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="New" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_2jnla")
+text = "New game"
+
+[node name="Load" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_2jnla")
+text = "Continue"
+
+[node name="Options" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_2jnla")
+text = "Options"
+
+[node name="Credits" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_2jnla")
+text = "Credits"
+
+[node name="Exit" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_2jnla")
+text = "Exit"
+
+[node name="Options_menu" parent="." instance=ExtResource("6_60vy2")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Menu/VBoxContainer/New" to="." method="_on_new_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="exit_options_menu" from="Options_menu" to="." method="_on_options_menu_exit_options_menu"]

@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://cokre1jhgdayi"]
+
+[ext_resource type="Theme" uid="uid://bwqig88kcvpte" path="res://assets/GUI/gui_default_theme.tres" id="1_qapi7"]
+[ext_resource type="Script" path="res://scenes/hotkey_rebinding_button.gd" id="1_vc13v"]
+[ext_resource type="FontFile" uid="uid://ybic0uytbk8e" path="res://assets/GUI/FsSongarak1Regular.ttf" id="3_bq0vk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8gerg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3mq8n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s1ynj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p4b8s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q2ycc"]
+
+[node name="HotkeyRebindingButton" type="Control" groups=["hotkey_button"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vc13v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 21.0
+offset_bottom = 11.5
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+theme = ExtResource("1_qapi7")
+theme_override_font_sizes/font_size = 32
+text = "ACTION"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 200
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bq0vk")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8gerg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3mq8n")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s1ynj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_p4b8s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q2ycc")
+toggle_mode = true
+text = "ACTION_KEY"
+
+[connection signal="toggled" from="HBoxContainer/Button" to="." method="_on_button_toggled"]
