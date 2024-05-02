@@ -1,0 +1,170 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfob2450lkn88"]
+
+[ext_resource type="PackedScene" uid="uid://cokre1jhgdayi" path="res://scenes/UI/hotkey_rebinding_button.tscn" id="1_1eiyw"]
+[ext_resource type="PackedScene" uid="uid://dxqfmit4ydh5e" path="res://scenes/UI/window_mode_button.tscn" id="1_4jnmu"]
+[ext_resource type="FontFile" uid="uid://ybic0uytbk8e" path="res://assets/GUI/FsSongarak1Regular.ttf" id="1_4kmwc"]
+[ext_resource type="PackedScene" uid="uid://khnlvmtegd6w" path="res://scenes/UI/audio_slider_settings.tscn" id="2_iwvy7"]
+[ext_resource type="PackedScene" uid="uid://f4xawuksn0hb" path="res://scenes/UI/resolution_mode_button.tscn" id="2_jetgm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aehr4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2soeu"]
+
+[node name="SettingsContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 50.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_4kmwc")
+theme_override_font_sizes/font_size = 48
+tab_alignment = 1
+
+[node name="Аудио" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_4kmwc")
+theme_override_font_sizes/font_size = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Аудио"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Аудио/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Аудио/MarginContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="audio_slider_settings" parent="TabContainer/Аудио/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_iwvy7")]
+layout_mode = 2
+
+[node name="audio_slider_settings2" parent="TabContainer/Аудио/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_iwvy7")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="audio_slider_settings3" parent="TabContainer/Аудио/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_iwvy7")]
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="Графика" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_4kmwc")
+theme_override_font_sizes/font_size = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Графика"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Графика/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Графика/MarginContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="resolution_mode_button" parent="TabContainer/Графика/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_jetgm")]
+layout_mode = 2
+
+[node name="window_mode_button" parent="TabContainer/Графика/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_4jnmu")]
+layout_mode = 2
+
+[node name="Управление" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_4kmwc")
+theme_override_font_sizes/font_size = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Управление"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Управление/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Управление/MarginContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+theme_override_styles/separator = SubResource("StyleBoxEmpty_aehr4")
+
+[node name="HotkeyRebindingButton" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
+layout_mode = 2
+
+[node name="HotkeyRebindingButton2" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
+layout_mode = 2
+action_name = "move_down"
+
+[node name="HotkeyRebindingButton3" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
+layout_mode = 2
+action_name = "move_left"
+
+[node name="HotkeyRebindingButton4" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
+layout_mode = 2
+action_name = "move_right"
+
+[node name="HotkeyRebindingButton5" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
+layout_mode = 2
+action_name = "jump"
+
+[node name="HotkeyRebindingButton6" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
+layout_mode = 2
+action_name = "run"
+
+[node name="HotkeyRebindingButton7" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
+layout_mode = 2
+action_name = "attack"
+
+[node name="HotkeyRebindingButton8" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
+layout_mode = 2
+action_name = "block"
+
+[node name="HotkeyRebindingButton9" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
+layout_mode = 2
+action_name = "action"
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+theme_override_styles/separator = SubResource("StyleBoxEmpty_2soeu")

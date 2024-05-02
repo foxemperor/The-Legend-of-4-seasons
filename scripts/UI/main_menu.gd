@@ -38,7 +38,6 @@ func _on_load_pressed() -> void:
 
 # При нажатии на кнопку Настройки
 func _on_options_pressed() -> void:
-	#get_tree().change_scene_to_file("res://scenes/options_menu.tscn")
 	is_option_menu_visible = true
 	options_menu.set_process(true)
 

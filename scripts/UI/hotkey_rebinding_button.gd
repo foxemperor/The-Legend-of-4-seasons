@@ -13,27 +13,27 @@ func _ready():
 	set_text_for_key()
 
 func set_action_name() -> void:
-	label.text = "Unssigned"
+	label.text = "Не назначено"
 	
 	match action_name:
 		"move_up":
-			label.text = "Move Up"
+			label.text = "Движение Вверх"
 		"move_down":
-			label.text = "Move Down"
+			label.text = "Движение Вниз"
 		"move_left":
-			label.text = "Move Left"
+			label.text = "Движение Влево"
 		"move_right":
-			label.text = "Move Right"
+			label.text = "Движение Вправо"
 		"jump":
-			label.text = "Jump"
+			label.text = "Прыжок"
 		"run":
-			label.text = "Run"
+			label.text = "Бег"
 		"attack":
-			label.text = "Attack"
+			label.text = "Атаковать"
 		"block":
-			label.text = "Block"
+			label.text = "Блокирование"
 		"action":
-			label.text = "Action"
+			label.text = "Действие"
 
 func set_text_for_key() -> void:
 	var action_events = InputMap.action_get_events(action_name)

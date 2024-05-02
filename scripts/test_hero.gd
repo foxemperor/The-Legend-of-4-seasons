@@ -15,6 +15,11 @@ var current_dir = "none"
 # Переменная для анимаций персонажа
 @onready var anim = $AnimatedSprite2D
 
+
+func _ready():
+	pass
+
+
 func _physics_process(delta):
 	hero_movement(delta)
 
@@ -53,6 +58,7 @@ func hero_movement(delta):
 
 	# Обновляем анимацию персонажа
 	hero_anim(input != Vector2.ZERO)
+	
 
 func hero_anim(movement):
 	var anim_name = "Idle_" + current_dir
@@ -63,6 +69,7 @@ func hero_anim(movement):
 		anim_name = "Walk_" + current_dir
 		if is_running:
 			anim_name = "Run_" + current_dir  # Используем анимацию бега
+	
 	anim.play(anim_name)
 
 # Вспомогательная функция для определения направления
