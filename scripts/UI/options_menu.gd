@@ -11,5 +11,5 @@ func _ready():
 
 func _on_exit_pressed() -> void:
 	exit_options_menu.emit()
-	print("Сигнал _on_exit_pressed отправлен!")
+	SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
 	set_process(false)

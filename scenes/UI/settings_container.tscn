@@ -146,7 +146,7 @@ action_name = "move_right"
 
 [node name="HotkeyRebindingButton5" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
 layout_mode = 2
-action_name = "jump"
+action_name = "inventory"
 
 [node name="HotkeyRebindingButton6" parent="TabContainer/Управление/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_1eiyw")]
 layout_mode = 2

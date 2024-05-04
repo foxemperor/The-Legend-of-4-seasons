@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=11 format=3 uid="uid://ckr1y5iu2fy55"]
+
+[ext_resource type="Script" path="res://resources/settings/keybind_resources.gd" id="1_75ksc"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_02lwm"]
+device = -1
+physical_keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventKey" id="InputEventKey_cayjt"]
+device = -1
+physical_keycode = 69
+unicode = 101
+
+[sub_resource type="InputEventKey" id="InputEventKey_v1rof"]
+device = -1
+physical_keycode = 81
+unicode = 113
+
+[sub_resource type="InputEventKey" id="InputEventKey_683vh"]
+device = -1
+physical_keycode = 73
+unicode = 105
+
+[sub_resource type="InputEventKey" id="InputEventKey_dgxh1"]
+device = -1
+physical_keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventKey" id="InputEventKey_ps8ym"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventKey" id="InputEventKey_sntiv"]
+device = -1
+physical_keycode = 68
+unicode = 100
+
+[sub_resource type="InputEventKey" id="InputEventKey_1elxl"]
+device = -1
+physical_keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventKey" id="InputEventKey_sdwot"]
+device = -1
+physical_keycode = 4194325
+
+[resource]
+script = ExtResource("1_75ksc")
+DEFAULT_MOVE_UP_KEY = SubResource("InputEventKey_1elxl")
+DEFAULT_MOVE_DOWN_KEY = SubResource("InputEventKey_dgxh1")
+DEFAULT_MOVE_LEFT_KEY = SubResource("InputEventKey_ps8ym")
+DEFAULT_MOVE_RIGHT_KEY = SubResource("InputEventKey_sntiv")
+DEFAULT_INVENTORY_KEY = SubResource("InputEventKey_683vh")
+DEFAULT_RUN_KEY = SubResource("InputEventKey_sdwot")
+DEFAULT_ATTACK_KEY = SubResource("InputEventKey_cayjt")
+DEFAULT_BLOCK_KEY = SubResource("InputEventKey_v1rof")
+DEFAULT_ACTION_KEY = SubResource("InputEventKey_02lwm")
