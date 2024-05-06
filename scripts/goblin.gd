@@ -6,8 +6,8 @@ extends CharacterBody2D
 # Границы локации (настройте эти значения)
 @export var мин_x = -200
 @export var макс_x = 200
-@export var мин_y = -200
-@export var макс_y = 200
+@export var мин_y = -0
+@export var макс_y = 150
 
 # Текущее направление
 var направление = Vector2.DOWN
