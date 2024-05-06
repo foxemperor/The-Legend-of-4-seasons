@@ -17,15 +17,17 @@ texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 5.0
-region_rect = Rect2(466, 60, 92, 28)
+region_rect = Rect2(348, 412, 92, 28)
+modulate_color = Color(1, 1, 1, 0.960784)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1l475"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ys7s0"]
 texture = ExtResource("2_nn6g2")
 texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 5.0
-region_rect = Rect2(348, 412, 92, 28)
+region_rect = Rect2(402, 60, 60, 28)
+modulate_color = Color(1, 1, 1, 0.960784)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_niebn"]
 texture = ExtResource("2_nn6g2")
@@ -84,7 +86,7 @@ Button/font_sizes/font_size = 40
 Button/fonts/font = ExtResource("1_6s2qm")
 Button/styles/disabled = SubResource("StyleBoxTexture_h6822")
 Button/styles/focus = SubResource("StyleBoxTexture_uvpho")
-Button/styles/hover = SubResource("StyleBoxTexture_1l475")
+Button/styles/hover = SubResource("StyleBoxTexture_ys7s0")
 Button/styles/normal = SubResource("StyleBoxTexture_niebn")
 Button/styles/pressed = SubResource("StyleBoxTexture_v1cdx")
 CheckButton/font_sizes/font_size = 36

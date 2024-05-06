@@ -14,20 +14,20 @@ grow_vertical = 2
 layout_mode = 1
 offset_right = 844.0
 offset_bottom = 64.0
-theme_override_constants/separation = 128
+theme_override_constants/separation = 98
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(480, 0)
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 theme = ExtResource("1_twrn7")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "BASE_LABEL"
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
-custom_minimum_size = Vector2(256, 64)
+custom_minimum_size = Vector2(160, 64)
 layout_mode = 2
 theme = ExtResource("1_twrn7")
 theme_override_font_sizes/font_size = 32

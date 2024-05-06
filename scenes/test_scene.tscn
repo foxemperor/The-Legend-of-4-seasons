@@ -23,8 +23,9 @@ func _process(delta):
 	pass
 
 func _input(event):
-	if event.is_action_pressed(\"ui_cancel\"):  # Check if Esc key is pressed
-		get_tree().change_scene_to_file(\"res://scenes/UI/main_menu.tscn\")  # Change to main menu scene
+	pass
+	#if event.is_action_pressed(\"ui_cancel\"):  # Check if Esc key is pressed
+		#get_tree().change_scene_to_file(\"res://scenes/UI/main_menu.tscn\")  # Change to main menu scene
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mq72k"]

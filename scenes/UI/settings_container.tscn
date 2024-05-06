@@ -1,10 +1,45 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfob2450lkn88"]
+[gd_scene load_steps=12 format=3 uid="uid://cfob2450lkn88"]
 
 [ext_resource type="PackedScene" uid="uid://cokre1jhgdayi" path="res://scenes/UI/hotkey_rebinding_button.tscn" id="1_1eiyw"]
 [ext_resource type="PackedScene" uid="uid://dxqfmit4ydh5e" path="res://scenes/UI/window_mode_button.tscn" id="1_4jnmu"]
 [ext_resource type="FontFile" uid="uid://ybic0uytbk8e" path="res://assets/GUI/FsSongarak1Regular.ttf" id="1_4kmwc"]
+[ext_resource type="Script" path="res://scripts/UI/settings_container.gd" id="1_k2ddq"]
 [ext_resource type="PackedScene" uid="uid://khnlvmtegd6w" path="res://scenes/UI/audio_slider_settings.tscn" id="2_iwvy7"]
 [ext_resource type="PackedScene" uid="uid://f4xawuksn0hb" path="res://scenes/UI/resolution_mode_button.tscn" id="2_jetgm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ctfsr"]
+bg_color = Color(0.341176, 0.27451, 0.352941, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_color = Color(0.235294, 0.12549, 0.156863, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aka35"]
+bg_color = Color(0.0823529, 0.0784314, 0.101961, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_color = Color(0.423529, 0.478431, 0.596078, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+expand_margin_right = 2.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6upd"]
+bg_color = Color(0.0823529, 0.0784314, 0.101961, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.423529, 0.478431, 0.596078, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aehr4"]
 
@@ -17,6 +52,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_k2ddq")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -26,14 +62,20 @@ anchor_bottom = 1.0
 offset_left = 100.0
 offset_top = 50.0
 offset_right = -100.0
-offset_bottom = -100.0
+offset_bottom = -90.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_4kmwc")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 42
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_ctfsr")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_aka35")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_aka35")
+theme_override_styles/panel = SubResource("StyleBoxFlat_a6upd")
 tab_alignment = 1
+current_tab = 1
 
 [node name="Аудио" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_4kmwc")
 theme_override_font_sizes/font_size = 32
@@ -69,7 +111,6 @@ layout_mode = 2
 bus_name = "SFX"
 
 [node name="Графика" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_4kmwc")
 theme_override_font_sizes/font_size = 32
