@@ -1737,3 +1737,4 @@ position = Vector2(-19, -20)
 
 [node name="Slime_b" parent="." instance=ExtResource("10_vxdwb")]
 position = Vector2(18, -26)
+"мин_y" = 0
