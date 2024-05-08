@@ -72,10 +72,8 @@ theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_aka35")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_aka35")
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6upd")
 tab_alignment = 1
-current_tab = 1
 
 [node name="Аудио" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_4kmwc")
 theme_override_font_sizes/font_size = 32
@@ -111,6 +109,7 @@ layout_mode = 2
 bus_name = "SFX"
 
 [node name="Графика" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_4kmwc")
 theme_override_font_sizes/font_size = 32

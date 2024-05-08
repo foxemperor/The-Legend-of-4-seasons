@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://gpg6gw2ft18d"]
+[gd_scene load_steps=19 format=3 uid="uid://gpg6gw2ft18d"]
 
 [ext_resource type="Texture2D" uid="uid://bkltsxtqtf0f5" path="res://assets/Landscapes/Forest/Summer/(summer) cat tails and lily pads tileset.png" id="1_q6ixq"]
 [ext_resource type="Texture2D" uid="uid://qq0qyv203mny" path="res://assets/Landscapes/Forest/Summer/(summer) cobblestone tileset.png" id="2_vefpy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bq2ypy1m8gxim" path="res://assets/Landscapes/Forest/Summer/summer water sparkles B 16x16.png" id="6_yrags"]
 [ext_resource type="Texture2D" uid="uid://dmom8bjgai8ud" path="res://assets/Landscapes/Forest/Summer/summer waterfall B 16x16.png" id="7_667b4"]
 [ext_resource type="PackedScene" uid="uid://cq5kcqi56fo50" path="res://scenes/test_hero.tscn" id="8_1biax"]
+[ext_resource type="AudioStream" uid="uid://c2mj8b444wtol" path="res://audio/music/Journey Across the Blue.ogg" id="9_0otpn"]
 
 [sub_resource type="GDScript" id="GDScript_ltue8"]
 script/source = "extends Node2D
@@ -1729,3 +1730,8 @@ layer_2/tile_data = PackedInt32Array(-2555943, 65538, 0, -2555942, 65538, 0, -25
 
 [node name="Hero" parent="." instance=ExtResource("8_1biax")]
 position = Vector2(-208, -120)
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_0otpn")
+autoplay = true
+bus = &"Music"

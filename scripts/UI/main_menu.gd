@@ -1,6 +1,7 @@
 class_name MainMenu
 extends Control
 
+
 @onready var start_btn = $Menu/VBoxContainer/New as Button
 @onready var load_btn = $Menu/VBoxContainer/Load as Button
 @onready var exit_btn = $Menu/VBoxContainer/Exit as Button
@@ -59,9 +60,10 @@ func toggle():
 # При нажатии на кнопку Новая игра
 func _on_new_pressed() -> void:
 	toggle()
-	get_tree().change_scene_to_file("res://scenes/test_scene.tscn")
+	get_tree().change_scene_to_file("res://scenes/game_manager.tscn")
 
 
+# При нажатии на кнопку Продолжить
 func _on_load_pressed() -> void:
 	pass 
 

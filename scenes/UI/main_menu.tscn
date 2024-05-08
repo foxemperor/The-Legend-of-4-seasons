@@ -89,6 +89,10 @@ size_flags_vertical = 4
 
 [node name="New" type="Button" parent="Menu/VBoxContainer" groups=["main_menu_buttons"]]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Load")
+focus_next = NodePath("../Load")
+focus_previous = NodePath("../Exit")
 theme = ExtResource("1_2jnla")
 text = "Новая игра"
 
@@ -109,6 +113,10 @@ text = "Авторы"
 
 [node name="Exit" type="Button" parent="Menu/VBoxContainer" groups=["main_menu_buttons"]]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Credits")
+focus_neighbor_bottom = NodePath("../New")
+focus_next = NodePath("../New")
+focus_previous = NodePath("../Credits")
 theme = ExtResource("1_2jnla")
 text = "Выход"
 
