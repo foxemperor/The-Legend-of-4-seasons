@@ -51,7 +51,7 @@ func _physics_process(delta):
 		WALKING:
 			if walking_timer >= 30.0:
 				state = STANDING
-				standing_timer = 0.0				
+				standing_timer = 0.0
 			else:
 				# С небольшой вероятностью меняем направление
 				if randi() % 100 < 10:  # 10% шанс изменить направление

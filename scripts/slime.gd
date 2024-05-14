@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-# Скорость движения
-@export var скорость = 100
+# Скорость движения слайма
+@export var speed = 50
+
 
 # Границы локации (настройте эти значения)
 @export var мин_x = -200
@@ -12,87 +13,70 @@ extends CharacterBody2D
 # Текущее направление
 var направление = Vector2.DOWN
 
-# Переменные для анимации
-const MAX_SPEED = 75
-const ACCEL = 1500
-const FRICTION = 600
-const RUN_SPEED_MULTIPLIER = 2
-
 var input = Vector2.ZERO
-var is_running = false
+
+# Переменные для анимации
 var current_dir = "none"
 
-# States for the goblin
+# Состояния слайма
 enum {
-	STANDING,
-	WALKING
+	СТОИТ,
+	ИДЕТ
 }
-var state = STANDING
+var state = СТОИТ
 
-# Timers for state durations
+# Таймеры для длительности состояний
 var standing_timer = 0.0
 var walking_timer = 0.0
 
 @onready var anim = $AnimatedSprite2D
 
 func _physics_process(delta):
-# Update timers
+	# Обновляем таймеры
 	standing_timer += delta
 	walking_timer += delta
 
-# State machine
+	# Машина состояний
 	match state:
-		STANDING:
+		СТОИТ:
 			if standing_timer >= 5.0:
-				# Start walking in a random direction
+				# Начинаем идти в случайном направлении
 				направление = Vector2(randi() % 2 - 1, randi() % 2 - 1).normalized()
-				state = WALKING
+				state = ИДЕТ
 				walking_timer = 0.0
-		WALKING:
+		ИДЕТ:
 			if walking_timer >= 30.0:
-				state = STANDING
-				standing_timer = 0.0				
+				state = СТОИТ
+				standing_timer = 0.0
 			else:
 				# С небольшой вероятностью меняем направление
 				if randi() % 100 < 10:  # 10% шанс изменить направление
 					# Добавляем небольшое случайное отклонение к текущему направлению
 					var random_offset = Vector2(randf() - 0.5, randf() - 0.5) * 0.5
 					направление = (направление + random_offset).normalized()
-			# Move the goblin
+				# Двигаем слайма
 			input = направление
 			slime_movement(delta)
 			slime_anim(true)
 
 func slime_movement(delta):
-	# Устанавливаем множитель скорости (всегда 1, так как гоблин не бегает)
-	var speed_multiplier = 1.0
-
-	# Обновляем направление гоблина
+	# Двигаем слайма с постоянной скоростью
+	velocity = направление * speed
+	# Обновляем направление слайма
 	if input != Vector2.ZERO:
 		current_dir = get_direction_name(input)
-
-	# Обновляем скорость гоблина
-	if input == Vector2.ZERO:
-		if velocity.length() > (FRICTION * delta):
-			velocity -= velocity.normalized() * (FRICTION * delta)
-		else:
-			velocity = Vector2.ZERO
-	else:
-		velocity += (input * ACCEL * delta * speed_multiplier)
-		velocity = velocity.limit_length(MAX_SPEED * speed_multiplier)
-
-	# Перемещаем гоблина
 	move_and_slide()
 
 func slime_anim(movement):
 	var anim_name = "Idle_" + current_dir
+	if state == ИДЕТ:
+		anim_name = "Bounce_" + current_dir
+	else:
+		anim_name = "Idle_" + current_dir
+	
 	if anim_name == "Idle_none":
 		anim_name = "Idle_down"
-	
-	if movement:
-		anim_name = "Bounce_" + current_dir
-		if is_running:
-			anim_name = "Run_" + current_dir  # Используем анимацию бега
+
 	anim.play(anim_name)
 	
 	# Отзеркаливание анимации
@@ -103,4 +87,3 @@ func get_direction_name(input):
 		return "right" if input.x > 0 else "left"
 	else:
 		return "down" if input.y > 0 else "up"
-

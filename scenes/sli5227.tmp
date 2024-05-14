@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://debcxihrulte3"]
+[gd_scene load_steps=75 format=3 uid="uid://debcxihrulte3"]
 
 [ext_resource type="Script" path="res://scripts/slime.gd" id="1_280v0"]
 [ext_resource type="Texture2D" uid="uid://fwar0x1x60c1" path="res://assets/Creatures/Slime/Blue Slime/momo_chomp.png" id="2_qebsw"]
@@ -545,12 +545,14 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_t5gxn"]
-radius = 42.107
-
 [node name="Slime_b" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_280v0")
+"скорость" = null
+"мин_x" = null
+"макс_x" = null
+"мин_y" = null
+"макс_y" = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -560,12 +562,3 @@ shape = SubResource("CapsuleShape2D_s3qhu")
 sprite_frames = SubResource("SpriteFrames_w8glr")
 animation = &"Idle_down"
 autoplay = "Idle_down"
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 7)
-shape = SubResource("CircleShape2D_t5gxn")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
