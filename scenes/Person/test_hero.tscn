@@ -1,6 +1,6 @@
 [gd_scene load_steps=125 format=3 uid="uid://cq5kcqi56fo50"]
 
-[ext_resource type="Script" path="res://scripts/test_hero.gd" id="1_588oy"]
+[ext_resource type="Script" path="res://scripts/Person/test_hero.gd" id="1_588oy"]
 [ext_resource type="Texture2D" uid="uid://rl7hq4kj6ahs" path="res://assets/Main Character/Hero.png" id="1_fxocg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t2gy4"]
