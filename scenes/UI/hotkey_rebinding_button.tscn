@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cokre1jhgdayi"]
 
 [ext_resource type="Theme" uid="uid://bwqig88kcvpte" path="res://assets/GUI/gui_default_theme.tres" id="1_qapi7"]
-[ext_resource type="Script" path="res://scenes/hotkey_rebinding_button.gd" id="1_vc13v"]
+[ext_resource type="Script" path="res://scripts/UI/hotkey_rebinding_button.gd" id="1_vc13v"]
 [ext_resource type="FontFile" uid="uid://ybic0uytbk8e" path="res://assets/GUI/FsSongarak1Regular.ttf" id="3_bq0vk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8gerg"]

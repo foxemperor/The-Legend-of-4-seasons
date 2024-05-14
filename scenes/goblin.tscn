@@ -1019,6 +1019,7 @@ animations = [{
 }]
 
 [node name="Goblin" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_2pnvt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

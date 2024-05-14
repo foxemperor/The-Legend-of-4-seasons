@@ -12,17 +12,24 @@ config_version=5
 
 config/name="Легенда о четырёх сезонах"
 config/version="0.2"
-run/main_scene="res://scenes/main_menu.tscn"
+run/main_scene="res://scenes/UI/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 run/max_fps=30
 config/icon="res://icon.svg"
 
+[autoload]
+
+SettingsSignalBus="*res://autoscripts/settings_signal_bus.gd"
+SettingsDataContainer="*res://autoscripts/settings_datacontainer.gd"
+SaveManager="*res://autoscripts/save_manager.gd"
+
 [display]
 
 window/size/viewport_width=1280
-window/size/viewport_height=720
-window/size/mode=3
-window/stretch/aspect="expand"
+window/size/viewport_height=768
+window/size/resizable=false
+window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 window/vsync/vsync_mode=0
 
 [input]
@@ -47,9 +54,9 @@ move_right={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"echo":false,"script":null)
 ]
 }
-jump={
+inventory={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"key_label":0,"unicode":105,"echo":false,"script":null)
 ]
 }
 run={
@@ -72,6 +79,13 @@ action={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_render/layer_1="wall"
+2d_render/layer_2="player"
+2d_render/layer_3="enemy"
+2d_render/layer_4="other"
 
 [rendering]
 

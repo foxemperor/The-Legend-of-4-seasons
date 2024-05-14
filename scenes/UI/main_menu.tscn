@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7pmqtaeidvhw"]
+[gd_scene load_steps=8 format=3 uid="uid://c7pmqtaeidvhw"]
 
 [ext_resource type="Theme" uid="uid://bwqig88kcvpte" path="res://assets/GUI/gui_default_theme.tres" id="1_2jnla"]
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_35u0x"]
+[ext_resource type="Script" path="res://scripts/UI/main_menu.gd" id="1_35u0x"]
 [ext_resource type="Texture2D" uid="uid://dgxw7nltmfo60" path="res://assets/Background/Simple/Forest_1.png" id="2_rbqyo"]
 [ext_resource type="Texture2D" uid="uid://b5t86x0g7yx8v" path="res://assets/GUI/GUI_Rect.png" id="2_wfxtv"]
 [ext_resource type="FontFile" uid="uid://ybic0uytbk8e" path="res://assets/GUI/FsSongarak1Regular.ttf" id="4_ytkxx"]
-[ext_resource type="PackedScene" uid="uid://b3xbqylvxq7p4" path="res://scenes/alt_options_menu.tscn" id="6_60vy2"]
+[ext_resource type="PackedScene" uid="uid://b3xbqylvxq7p4" path="res://scenes/UI/options_menu.tscn" id="6_60vy2"]
+[ext_resource type="AudioStream" uid="uid://be1ikmdisht0w" path="res://audio/music/Origins.ogg" id="7_jgi32"]
 
 [node name="Main_menu" type="Control"]
 layout_mode = 3
@@ -16,7 +17,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_35u0x")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,8 +33,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_rbqyo")
-expand_mode = 5
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="Logo" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -50,7 +58,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("4_ytkxx")
 theme_override_font_sizes/font_size = 60
-text = "Legend of 4 seasons"
+text = "Легенда о 4 сезонах"
 horizontal_alignment = 1
 
 [node name="Menu" type="MarginContainer" parent="."]
@@ -79,38 +87,61 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="New" type="Button" parent="Menu/VBoxContainer"]
+[node name="New" type="Button" parent="Menu/VBoxContainer" groups=["main_menu_buttons"]]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Load")
+focus_next = NodePath("../Load")
+focus_previous = NodePath("../Exit")
 theme = ExtResource("1_2jnla")
-text = "New game"
+text = "Новая игра"
 
-[node name="Load" type="Button" parent="Menu/VBoxContainer"]
+[node name="Load" type="Button" parent="Menu/VBoxContainer" groups=["main_menu_buttons"]]
 layout_mode = 2
 theme = ExtResource("1_2jnla")
-text = "Continue"
+text = "Продолжить"
 
-[node name="Options" type="Button" parent="Menu/VBoxContainer"]
+[node name="Options" type="Button" parent="Menu/VBoxContainer" groups=["main_menu_buttons"]]
 layout_mode = 2
 theme = ExtResource("1_2jnla")
-text = "Options"
+text = "Настройки"
 
-[node name="Credits" type="Button" parent="Menu/VBoxContainer"]
+[node name="Credits" type="Button" parent="Menu/VBoxContainer" groups=["main_menu_buttons"]]
 layout_mode = 2
 theme = ExtResource("1_2jnla")
-text = "Credits"
+text = "Авторы"
 
-[node name="Exit" type="Button" parent="Menu/VBoxContainer"]
+[node name="Exit" type="Button" parent="Menu/VBoxContainer" groups=["main_menu_buttons"]]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Credits")
+focus_neighbor_bottom = NodePath("../New")
+focus_next = NodePath("../New")
+focus_previous = NodePath("../Credits")
 theme = ExtResource("1_2jnla")
-text = "Exit"
+text = "Выход"
 
 [node name="Options_menu" parent="." instance=ExtResource("6_60vy2")]
 visible = false
 layout_mode = 1
 
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_jgi32")
+autoplay = true
+bus = &"Music"
+
+[connection signal="mouse_entered" from="Menu/VBoxContainer/New" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/VBoxContainer/New" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Menu/VBoxContainer/New" to="." method="_on_new_pressed"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Load" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/VBoxContainer/Load" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Menu/VBoxContainer/Load" to="." method="_on_load_pressed"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Options" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/VBoxContainer/Options" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Menu/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Credits" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/VBoxContainer/Credits" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Menu/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Exit" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/VBoxContainer/Exit" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Menu/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="exit_options_menu" from="Options_menu" to="." method="_on_options_menu_exit_options_menu"]

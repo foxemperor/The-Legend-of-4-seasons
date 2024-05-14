@@ -1,22 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dci2phwb7u4o3"]
+[gd_scene load_steps=5 format=3 uid="uid://dci2phwb7u4o3"]
 
 [ext_resource type="Texture2D" uid="uid://dgxw7nltmfo60" path="res://assets/Background/Simple/Forest_1.png" id="1_k4mk3"]
 [ext_resource type="FontFile" uid="uid://ybic0uytbk8e" path="res://assets/GUI/FsSongarak1Regular.ttf" id="2_56jeg"]
+[ext_resource type="AudioStream" uid="uid://be1ikmdisht0w" path="res://audio/music/Origins.ogg" id="3_hc3tj"]
 
 [sub_resource type="GDScript" id="GDScript_nj3eb"]
 script/source = "extends Control
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process_input(true)
 
+
 func _input(event):
 	if event.is_pressed():
-		get_tree().change_scene_to_file(\"res://scenes/main_menu.tscn\")
+		get_tree().change_scene_to_file(\"res://scenes/UI/main_menu.tscn\")
+
+
 
 func _process(delta):
 	pass
+
 "
 
 [node name="Start_screen" type="Control"]
@@ -28,7 +32,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_nj3eb")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,7 +48,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_k4mk3")
-expand_mode = 3
+stretch_mode = 6
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -45,13 +57,18 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -286.0
-offset_top = -70.0
-offset_right = 286.0
-offset_bottom = -24.0
+offset_left = -299.0
+offset_top = -68.0
+offset_right = 301.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_56jeg")
 theme_override_font_sizes/font_size = 60
-text = "Press any key to START"
+text = "~Нажмите любую клавишу~"
 horizontal_alignment = 1
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hc3tj")
+autoplay = true
+bus = &"Music"

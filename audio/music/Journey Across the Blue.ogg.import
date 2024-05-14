@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c2mj8b444wtol"
+path="res://.godot/imported/Journey Across the Blue.ogg-90b1c012f1dcd96b757d80941fad4721.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/music/Journey Across the Blue.ogg"
+dest_files=["res://.godot/imported/Journey Across the Blue.ogg-90b1c012f1dcd96b757d80941fad4721.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

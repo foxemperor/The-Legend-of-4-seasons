@@ -11,41 +11,50 @@ func _ready():
 	set_process_unhandled_key_input(false)
 	set_action_name()
 	set_text_for_key()
+	load_keybinds()
+
+
+func load_keybinds() -> void:
+	rebind_action_key(SettingsDataContainer.get_keybind(action_name))
+
 
 func set_action_name() -> void:
-	label.text = "Unssigned"
+	label.text = "Не назначено"
 	
 	match action_name:
 		"move_up":
-			label.text = "Move Up"
+			label.text = "Движение Вверх"
 		"move_down":
-			label.text = "Move Down"
+			label.text = "Движение Вниз"
 		"move_left":
-			label.text = "Move Left"
+			label.text = "Движение Влево"
 		"move_right":
-			label.text = "Move Right"
-		"jump":
-			label.text = "Jump"
+			label.text = "Движение Вправо"
+		"inventory":
+			label.text = "Инвентарь"
 		"run":
-			label.text = "Run"
+			label.text = "Бег"
 		"attack":
-			label.text = "Attack"
+			label.text = "Атаковать"
 		"block":
-			label.text = "Block"
+			label.text = "Блокирование"
 		"action":
-			label.text = "Action"
+			label.text = "Действие"
 
 func set_text_for_key() -> void:
 	var action_events = InputMap.action_get_events(action_name)
-	var action_event = action_events[0]
-	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
+	if action_events.size() > 0:
+		var action_event = action_events[0]
+		var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
+		button.text = "%s" % action_keycode
+	else:
+		button.text = "Нет привязки!"
 	
-	button.text = "%s" % action_keycode
 
-	
+
 func _on_button_toggled(button_pressed):
 	if button_pressed:
-		button.text = "Press any key"
+		button.text = "Нажмите клавишу"
 		set_process_unhandled_key_input(button_pressed)
 		
 		for i in get_tree().get_nodes_in_group("hotkey_button"):
@@ -69,6 +78,7 @@ func _unhandled_key_input(event):
 func rebind_action_key(event) -> void:
 	InputMap.action_erase_events(action_name)
 	InputMap.action_add_event(action_name, event)
+	SettingsDataContainer.set_keybind(action_name, event)
 	
 	set_process_unhandled_key_input(false)
 	set_text_for_key()

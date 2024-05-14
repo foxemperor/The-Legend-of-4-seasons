@@ -90,7 +90,7 @@ func slime_anim(movement):
 		anim_name = "Idle_down"
 	
 	if movement:
-		anim_name = "Walk_" + current_dir
+		anim_name = "Bounce_" + current_dir
 		if is_running:
 			anim_name = "Run_" + current_dir  # Используем анимацию бега
 	anim.play(anim_name)
