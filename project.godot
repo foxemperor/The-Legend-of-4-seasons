@@ -22,7 +22,6 @@ config/icon="res://icon.svg"
 SettingsSignalBus="*res://autoscripts/settings_signal_bus.gd"
 SettingsDataContainer="*res://autoscripts/settings_datacontainer.gd"
 SaveManager="*res://autoscripts/save_manager.gd"
-NavigationManager="*res://scripts/global/navigation_manager.gd"
 
 [display]
 

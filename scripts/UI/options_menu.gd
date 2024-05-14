@@ -1,8 +1,8 @@
 class_name OptionsMenu
 extends Control
 
-@onready var back_button = $Panel/MarginContainer/VBoxContainer/Back_btn as Button
-@onready var settings_container = $Panel/MarginContainer/VBoxContainer/SettingsContainer as SettingsTabContainer
+@onready var back_button = $MarginContainer/VBoxContainer/Back_btn as Button
+@onready var settings_container = $MarginContainer/VBoxContainer/SettingsContainer as SettingsTabContainer
 
 signal exit_options_menu()
 

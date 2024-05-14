@@ -5,10 +5,10 @@ extends Control
 
 # Словарь соответсвий форматов разрешения к вестору 2i
 const RESOLUTION_DICTIONARY : Dictionary = {
-	#"800x600" : Vector2i(800, 600),
-	#"1024x768" : Vector2i(1024, 768),
-	#"1152x864" : Vector2i(1152, 864),
-	#"1280x720" : Vector2i(1280, 720),
+	"800x600" : Vector2i(800, 600),
+	"1024x768" : Vector2i(1024, 768),
+	"1152x864" : Vector2i(1152, 864),
+	"1280x720" : Vector2i(1280, 720),
 	"1280x768" : Vector2i(1280, 768),
 	"1280x800" : Vector2i(1280, 800),
 	"1280x960" : Vector2i(1280, 960),
