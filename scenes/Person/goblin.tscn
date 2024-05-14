@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://bvv1rjsjwjpdx"]
+[gd_scene load_steps=136 format=3 uid="uid://bvv1rjsjwjpdx"]
 
 [ext_resource type="Script" path="res://scripts/Person/goblin.gd" id="1_2pnvt"]
 [ext_resource type="Texture2D" uid="uid://4hbakq4mw6ms" path="res://assets/Creatures/Goblin/gobu idle.png" id="2_rp4yb"]
@@ -1018,8 +1018,12 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6nc5"]
+radius = 42.107
+
 [node name="Goblin" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 6
+collision_mask = 7
 script = ExtResource("1_2pnvt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1030,3 +1034,9 @@ shape = SubResource("CapsuleShape2D_s3qhu")
 sprite_frames = SubResource("SpriteFrames_w8glr")
 animation = &"Spin_left"
 autoplay = "Idle_down"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_d6nc5")

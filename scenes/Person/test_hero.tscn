@@ -929,7 +929,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="hero" type="CharacterBody2D"]
+[node name="Hero" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_588oy")
 
