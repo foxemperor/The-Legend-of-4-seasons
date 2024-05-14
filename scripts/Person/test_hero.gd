@@ -17,7 +17,7 @@ var current_dir = "none"
 
 
 func _ready():
-	pass
+	add_to_group("player")
 
 
 func _physics_process(delta):

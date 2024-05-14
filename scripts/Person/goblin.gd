@@ -1,18 +1,18 @@
 extends CharacterBody2D
 
-# Скорость движения
-@export var скорость = 100
+# Movement speed
+@export var speed = 100
 
-# Границы локации (настройте эти значения)
-@export var мин_x = -200
-@export var макс_x = 200
-@export var мин_y = -0
-@export var макс_y = 150
+# Location boundaries (adjust these values)
+@export var min_x = -200
+@export var max_x = 200
+@export var min_y = -0
+@export var max_y = 150
 
-# Текущее направление
-var направление = Vector2.DOWN
+# Current direction
+var direction = Vector2.DOWN
 
-# Переменные для анимации
+# Animation variables
 const MAX_SPEED = 75
 const ACCEL = 1500
 const FRICTION = 600
@@ -22,10 +22,14 @@ var input = Vector2.ZERO
 var is_running = false
 var current_dir = "none"
 
+# Enemy
+var enemy = null
+
 # States for the goblin
 enum {
 	STANDING,
-	WALKING
+	WALKING,
+	CHASING
 }
 var state = STANDING
 
@@ -36,20 +40,26 @@ var walking_timer = 0.0
 @onready var anim = $AnimatedSprite2D
 
 func _physics_process(delta):
-# Update timers
+	# Обновляем таймеры
 	standing_timer += delta
 	walking_timer += delta
 
-# State machine
+	# Машина состояний
 	match state:
 		STANDING:
-			if standing_timer >= 5.0:
-				# Start walking in a random direction
-				направление = Vector2(randi() % 2 - 1, randi() % 2 - 1).normalized()
+			if enemy != null:
+				state = CHASING
+			# Если таймер стояния больше 5 секунд
+			elif standing_timer >= 5.0:
+				# Начинаем идти в случайном направлении
+				direction = Vector2(randi() % 2 - 1, randi() % 2 - 1).normalized()
 				state = WALKING
 				walking_timer = 0.0
 		WALKING:
-			if walking_timer >= 30.0:
+			if enemy != null:
+				state = CHASING
+			# Если таймер ходьбы больше 30 секунд
+			elif walking_timer >= 30.0:
 				state = STANDING
 				standing_timer = 0.0
 			else:
@@ -57,11 +67,24 @@ func _physics_process(delta):
 				if randi() % 100 < 10:  # 10% шанс изменить направление
 					# Добавляем небольшое случайное отклонение к текущему направлению
 					var random_offset = Vector2(randf() - 0.5, randf() - 0.5) * 0.5
-					направление = (направление + random_offset).normalized()
-			# Move the goblin
-			input = направление
+					direction = (direction + random_offset).normalized()
+			# Двигаем гоблина
+			input = direction
 			goblin_movement(delta)
 			goblin_anim(true)
+			
+		CHASING:
+			# Если враг обнаружен
+			if enemy != null:
+				# Двигаемся в сторону врага
+				direction = (enemy.position - position).normalized()
+				input = direction
+				goblin_movement(delta)
+				goblin_anim(true)
+			else:
+				# Возвращаемся в состояние стояния
+				state = STANDING
+				standing_timer = 0.0
 
 func goblin_movement(delta):
 	# Устанавливаем множитель скорости (всегда 1, так как гоблин не бегает)
@@ -92,7 +115,7 @@ func goblin_anim(movement):
 	if movement:
 		anim_name = "Walk_" + current_dir
 		if is_running:
-			anim_name = "Run_" + current_dir  # Используем анимацию бега
+			anim_name = "Hop_" + current_dir  # Используем анимацию бега
 	anim.play(anim_name)
 	
 	# Отзеркаливание анимации
@@ -103,4 +126,16 @@ func get_direction_name(input):
 		return "right" if input.x > 0 else "left"
 	else:
 		return "down" if input.y > 0 else "up"
+
+func _on_detected_body_entered(body):
+	# Запоминаем врага и переходим в состояние преследования
+	print("Body entered!")
+	if body.is_in_group("player"):
+		enemy = body
+		state = CHASING
+
+func _on_detected_body_exited(body):
+	# Сбрасываем врага
+	print("Body exited!")
+	enemy = null
 

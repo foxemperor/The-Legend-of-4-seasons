@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://rl7hq4kj6ahs" path="res://assets/Main Character/Hero.png" id="1_fxocg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t2gy4"]
-height = 32.0
+radius = 11.0
+height = 38.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npqrl"]
 atlas = ExtResource("1_fxocg")
@@ -930,7 +931,8 @@ animations = [{
 }]
 
 [node name="Hero" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_588oy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
