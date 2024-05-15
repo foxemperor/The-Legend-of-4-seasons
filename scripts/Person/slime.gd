@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # Скорость движения слайма
-@export var speed = 50
+@export var speed = 20
 
 # Границы локации (настройте эти значения)
 @export var min_x = -200

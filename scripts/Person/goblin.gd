@@ -129,13 +129,13 @@ func get_direction_name(input):
 
 func _on_detected_body_entered(body):
 	# Запоминаем врага и переходим в состояние преследования
-	print("Body entered!")
+	#print("Body entered!")
 	if body.is_in_group("player"):
 		enemy = body
 		state = CHASING
 
 func _on_detected_body_exited(body):
 	# Сбрасываем врага
-	print("Body exited!")
+	#print("Body exited!")
 	enemy = null
 
