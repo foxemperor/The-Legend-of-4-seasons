@@ -124,7 +124,10 @@ func goblin_anim(movement):
 	anim.play(anim_name)
 	
 	# Отзеркаливание анимации
-	anim.flip_h = current_dir == "right"
+	if anim_name == "Attack_right":
+		anim_name = "Attack_right"
+	else:
+		anim.flip_h = current_dir == "right"
 
 func get_direction_name(input):
 	if abs(input.x) > abs(input.y):

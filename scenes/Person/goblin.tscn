@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://bvv1rjsjwjpdx"]
+[gd_scene load_steps=140 format=3 uid="uid://bvv1rjsjwjpdx"]
 
 [ext_resource type="Script" path="res://scripts/Person/goblin.gd" id="1_2pnvt"]
 [ext_resource type="Texture2D" uid="uid://4hbakq4mw6ms" path="res://assets/Creatures/Goblin/gobu idle.png" id="2_rp4yb"]
@@ -393,6 +393,22 @@ atlas = ExtResource("7_277rg")
 region = Rect2(64, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrxsn"]
+atlas = ExtResource("7_277rg")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7408a"]
+atlas = ExtResource("7_277rg")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl0i3"]
+atlas = ExtResource("7_277rg")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5trk3"]
+atlas = ExtResource("7_277rg")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p72i1"]
 atlas = ExtResource("7_277rg")
 region = Rect2(96, 32, 32, 32)
 
@@ -910,6 +926,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_7408a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl0i3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5trk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p72i1")
+}],
+"loop": true,
+"name": &"Spin_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5yyvu")
 }, {
 "duration": 1.0,
@@ -1032,7 +1065,7 @@ shape = SubResource("CapsuleShape2D_s3qhu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w8glr")
-animation = &"Hop_right"
+animation = &"Spin_right"
 autoplay = "Idle_down"
 
 [node name="Detected" type="Area2D" parent="."]

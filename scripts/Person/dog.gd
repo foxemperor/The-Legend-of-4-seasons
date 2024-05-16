@@ -23,21 +23,44 @@ var enemy = null
 
 # States for the bee
 enum {
+	STANDING, # Standing still
 	WALKING, # Walking
 	CHASING # Chasing the enemy
 }
-var state = WALKING
+var state = STANDING
+
+# Timers for state durations
+var standing_timer = 0.0
+var walking_timer = 0.0
 
 # Reference to the AnimatedSprite2D node
 @onready var anim = $AnimatedSprite2D
 
 func _physics_process(delta):
+	# Update timers
+	standing_timer += delta
+	walking_timer += delta
+
 	# State machine
 	match state:
+		STANDING:
+			# If the enemy is detected
+			if enemy != null:
+				state = CHASING
+			# If the standing timer is greater than 5 seconds
+			elif standing_timer >= 5.0:
+				# Start walking in a random direction
+				direction = Vector2(randi() % 2 - 1, randi() % 2 - 1).normalized()
+				state = WALKING
+				walking_timer = 0.0
 		WALKING:
 			# If the enemy is detected
 			if enemy != null:
 				state = CHASING
+			# If the walking timer is greater than 30 seconds
+			elif walking_timer >= 30.0:
+				state = STANDING
+				standing_timer = 0.0
 			else:
 				# With a small probability, change direction
 				if randi() % 100 < 10:  # 10% chance to change direction
@@ -46,20 +69,21 @@ func _physics_process(delta):
 					direction = (direction + random_offset).normalized()
 			# Move the bee
 			input = direction
-			cat_movement(delta)
-			cat_anim(true)
+			dog_movement(delta)
+			dog_anim(true)
 		CHASING:
 			# If the enemy is detected
 			if enemy != null:
 				# Move towards the enemy
 				direction = (enemy.position - position).normalized()
-				cat_movement(delta)
-				cat_anim(true)
+				dog_movement(delta)
+				dog_anim(true)
 			else:
 				# Return to the standing state
-				state = WALKING
+				state = STANDING
+				standing_timer = 0.0
 
-func cat_movement(delta):
+func dog_movement(delta):
 	# Move the bee with a constant speed
 	velocity = direction * speed
 	# Update the bee's direction
@@ -67,9 +91,18 @@ func cat_movement(delta):
 		current_dir = get_direction_name(input)
 	move_and_slide()
 
-func cat_anim(movement):
+func dog_anim(movement):
 	# Select the animation based on the state
-	var anim_name = "Walk_" + current_dir
+	var anim_name = "Idle_" + current_dir
+	if state == WALKING:
+		anim_name = "Walk_" + current_dir
+	else:
+		anim_name = "Idle_" + current_dir
+	
+	# If the direction is not defined, use the "Idle_down" animation
+	if anim_name == "Idle_none":
+		anim_name = "Idle_down"
+
 	# Play the selected animation
 	anim.play(anim_name)
 
@@ -82,7 +115,7 @@ func get_direction_name(input):
 
 func _on_detected_body_entered(body):
 	# Remember the enemy and switch to the chasing state
-	if body.is_in_group("non"):
+	if body.is_in_group("player"):
 		enemy = body
 		state = CHASING
 

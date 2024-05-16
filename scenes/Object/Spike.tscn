@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://bpgoph816cu13"]
+
+[ext_resource type="Script" path="res://scripts/trap.gd" id="1_esu6n"]
+[ext_resource type="Texture2D" uid="uid://dyrum3q7kc5mr" path="res://assets/Landscapes/Castle Dungeon/castle dungeon tileset.png" id="2_iicav"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udi5r"]
+atlas = ExtResource("2_iicav")
+region = Rect2(544, 320, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on4bs"]
+atlas = ExtResource("2_iicav")
+region = Rect2(512, 320, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u6hq"]
+atlas = ExtResource("2_iicav")
+region = Rect2(480, 320, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bopu"]
+atlas = ExtResource("2_iicav")
+region = Rect2(448, 320, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpb57"]
+atlas = ExtResource("2_iicav")
+region = Rect2(448, 320, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nycl"]
+atlas = ExtResource("2_iicav")
+region = Rect2(480, 320, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwnru"]
+atlas = ExtResource("2_iicav")
+region = Rect2(512, 320, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2u66"]
+atlas = ExtResource("2_iicav")
+region = Rect2(544, 320, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uceu6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udi5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on4bs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u6hq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bopu")
+}],
+"loop": false,
+"name": &"Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpb57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nycl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwnru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2u66")
+}],
+"loop": false,
+"name": &"Up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7h76h"]
+size = Vector2(32, 32)
+
+[node name="Spike" type="Area2D"]
+z_index = -1
+collision_mask = 4
+script = ExtResource("1_esu6n")
+
+[node name="SpikeSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uceu6")
+animation = &"Down"
+autoplay = "Down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_7h76h")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
