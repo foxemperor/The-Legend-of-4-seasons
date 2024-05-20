@@ -725,7 +725,7 @@ collision_mask = 7
 script = ExtResource("1_4p4os")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 4)
+position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_s3qhu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -739,7 +739,7 @@ collision_layer = 2
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detected"]
-position = Vector2(2, 4)
+position = Vector2(1, 4)
 shape = SubResource("CircleShape2D_sb8ku")
 
 [connection signal="body_entered" from="Detected" to="." method="_on_detected_body_entered"]
