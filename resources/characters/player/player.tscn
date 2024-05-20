@@ -1,13 +1,9 @@
-[gd_scene load_steps=58 format=3 uid="uid://b438gm1iq1lj2"]
+[gd_scene load_steps=59 format=3 uid="uid://b438gm1iq1lj2"]
 
 [ext_resource type="Script" path="res://resources/characters/player/player.gd" id="1_gwdsg"]
 [ext_resource type="Texture2D" uid="uid://e2s78bxd4dh0" path="res://assets/Main Hero/main_hero.png" id="2_labc2"]
 [ext_resource type="Texture2D" uid="uid://cprtyoomqpwp5" path="res://assets/Main Hero/main_hero_attack.png" id="3_fv1qo"]
 [ext_resource type="PackedScene" uid="uid://cxe7aglabkpej" path="res://scenes/UI/pause_menu.tscn" id="4_2ssq0"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vygri"]
-radius = 7.0
-height = 34.0
 
 [sub_resource type="Animation" id="Animation_71dvv"]
 length = 0.001
@@ -919,14 +915,19 @@ _data = {
 "walk_up": SubResource("Animation_n1d1k")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4frhn"]
+size = Vector2(14, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7oh7g"]
+size = Vector2(14, 18)
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_gwdsg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
-shape = SubResource("CapsuleShape2D_vygri")
-
 [node name="SpriteIdle" type="Sprite2D" parent="."]
+position = Vector2(0, -11)
 texture = ExtResource("2_labc2")
 hframes = 8
 vframes = 36
@@ -934,7 +935,7 @@ frame = 16
 
 [node name="SpriteAttack" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(0, 1)
+position = Vector2(0, -17)
 texture = ExtResource("3_fv1qo")
 hframes = 15
 vframes = 4
@@ -944,6 +945,16 @@ libraries = {
 "": SubResource("AnimationLibrary_imxta")
 }
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_4frhn")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_7oh7g")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 
@@ -951,3 +962,5 @@ zoom = Vector2(3, 3)
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_2ssq0")]
 visible = false
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

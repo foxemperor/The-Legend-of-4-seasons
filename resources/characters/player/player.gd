@@ -2,11 +2,15 @@ class_name Player
 
 extends CharacterBody2D
 
+signal health_changed
+
 @export var speed: int = 35
 @onready var animation_player = $AnimationIdle as AnimationPlayer
 @onready var sprite_idle = $SpriteIdle as Sprite2D
 @onready var sprite_attack = $SpriteAttack as Sprite2D
 
+@export var max_health = 3
+@onready var current_health: int = max_health
 
 
 
@@ -180,3 +184,12 @@ func block() -> void:
 		animation_player.play("stay_" + current_dir)
 	
 
+
+
+func _on_hurt_box_area_entered(area):
+	if area.name == "HitBox":
+		current_health -= 1
+		if current_health <0:
+			current_health = max_health
+		health_changed.emit(current_health)
+	
