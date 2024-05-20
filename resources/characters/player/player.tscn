@@ -924,7 +924,9 @@ size = Vector2(14, 18)
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
+collision_mask = 15
 script = ExtResource("1_gwdsg")
+max_health = 5
 
 [node name="SpriteIdle" type="Sprite2D" parent="."]
 position = Vector2(0, -11)
