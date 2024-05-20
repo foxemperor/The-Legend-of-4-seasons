@@ -1,11 +1,9 @@
-[gd_scene load_steps=125 format=3 uid="uid://cq5kcqi56fo50"]
+[gd_scene load_steps=126 format=3 uid="uid://cq5kcqi56fo50"]
 
 [ext_resource type="Script" path="res://scripts/Person/test_hero.gd" id="1_588oy"]
 [ext_resource type="Texture2D" uid="uid://rl7hq4kj6ahs" path="res://assets/Main Character/Hero.png" id="1_fxocg"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t2gy4"]
-radius = 11.0
-height = 38.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5lbcu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npqrl"]
 atlas = ExtResource("1_fxocg")
@@ -930,6 +928,10 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t2gy4"]
+radius = 11.0
+height = 38.0
+
 [node name="Hero" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 4
@@ -938,7 +940,7 @@ safe_margin = 1.0
 script = ExtResource("1_588oy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_t2gy4")
+shape = SubResource("CapsuleShape2D_5lbcu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6l0wn")
@@ -948,6 +950,12 @@ autoplay = "Idle_down"
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 15
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CapsuleShape2D_t2gy4")
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_exited" from="HitBox" to="." method="_on_hit_box_body_exited"]

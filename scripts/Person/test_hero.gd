@@ -15,10 +15,21 @@ var current_dir = "none"
 # Переменная для анимаций персонажа
 @onready var anim = $AnimatedSprite2D
 
+var health = 5
+
+func apply_damage(amount):
+	health -= amount
+	print("Игрок получил урон: ", amount, ". Здоровье: ", health)
+
+	if health <= 0:
+		die()
+
+func die():
+	print("Игрок погиб!")
+	# Добавьте логику смерти игрока (например, анимация, перезагрузка уровня)
 
 func _ready():
 	add_to_group("player")
-
 
 func _physics_process(delta):
 	hero_movement(delta)
@@ -86,3 +97,12 @@ func runningcheck(is_running):
 		check = true
 	else:
 		check = false
+
+func _on_hit_box_body_entered(body):
+		if body.is_in_group("enemy"):
+		# Нанести урон игроку
+			apply_damage(body.damage) # Предполагается, что у врагов есть свойство "damage"
+
+
+func _on_hit_box_body_exited(body):
+	pass # Replace with function body.
