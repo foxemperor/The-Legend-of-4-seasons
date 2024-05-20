@@ -76,7 +76,8 @@ animations = [{
 size = Vector2(32, 32)
 
 [node name="Spike" type="Area2D"]
-z_index = -1
+z_index = 1
+y_sort_enabled = true
 collision_mask = 4
 script = ExtResource("1_esu6n")
 

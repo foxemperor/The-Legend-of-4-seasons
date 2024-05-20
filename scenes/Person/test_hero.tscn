@@ -933,8 +933,9 @@ radius = 11.0
 height = 38.0
 
 [node name="Hero" type="CharacterBody2D"]
+visibility_layer = 7
 z_index = 1
-collision_layer = 4
+y_sort_enabled = true
 collision_mask = 15
 safe_margin = 1.0
 script = ExtResource("1_588oy")
@@ -951,7 +952,6 @@ autoplay = "Idle_down"
 zoom = Vector2(2.5, 2.5)
 
 [node name="HitBox" type="Area2D" parent="."]
-collision_layer = 4
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]

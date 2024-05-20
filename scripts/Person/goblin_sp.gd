@@ -114,8 +114,8 @@ func goblin_movement(delta):
 
 func goblin_anim(movement):
 	var anim_name = "Idle_" + current_dir
-	if anim_name == "Idle_none":
-		anim_name = "Idle_down"
+	if current_dir == "none":
+		current_dir = "down"
 	
 	if movement:
 		anim_name = "Walk_" + current_dir
