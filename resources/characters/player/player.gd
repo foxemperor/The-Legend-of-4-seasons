@@ -1,14 +1,20 @@
+class_name Player
+
 extends CharacterBody2D
+
+signal health_changed
 
 @export var speed: int = 35
 @onready var animation_player = $AnimationIdle as AnimationPlayer
 @onready var sprite_idle = $SpriteIdle as Sprite2D
 @onready var sprite_attack = $SpriteAttack as Sprite2D
 
+@export var max_health = 3
+@onready var current_health: int = max_health
 
 
 
-const MAX_SPEED = 75
+const MAX_SPEED = 70
 const ACCEL = 1500
 const FRICTION = 600
 
@@ -21,7 +27,8 @@ var idle_time = 0.0
 
 
 func _ready():
-	pass
+	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
+	NavigationManager.level_loaded.connect(_on_level_loaded)
 
 
 func _process(delta):
@@ -35,8 +42,22 @@ func _physics_process(delta):
 	hero_movement(delta)
 
 
+func _on_level_loaded(destination_tag):
+	call_deferred("teleport_to_destination", destination_tag)
+
+
+func teleport_to_destination(destination_tag):
+	var destination_node = get_tree().get_root().find_node(destination_tag)
+	if destination_node:
+		global_position = destination_node.global_position
+	else:
+		push_error("Destination node not found: " + destination_tag)
+
+
 func _unhandled_input(event):
-	pass
+	if event is InputEventKey and event.is_action_pressed("ui_cancel"):
+		$CanvasLayer/PauseMenu.visible = !$CanvasLayer/PauseMenu.visible
+		get_tree().paused = $CanvasLayer/PauseMenu.visible
 
 
 func get_input():
@@ -45,7 +66,10 @@ func get_input():
 	return input.normalized()
 
 
-
+func _on_spawn(position: Vector2i, direction: String):
+	global_position = position
+	current_dir = direction
+	animation_player.play("stay_" + current_dir)
 
 
 func hero_movement(delta):
@@ -160,3 +184,12 @@ func block() -> void:
 		animation_player.play("stay_" + current_dir)
 	
 
+
+
+func _on_hurt_box_area_entered(area):
+	if area.name == "HitBox":
+		current_health -= 1
+		if current_health <0:
+			current_health = max_health
+		health_changed.emit(current_health)
+	
