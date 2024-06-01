@@ -36,6 +36,8 @@ var standing_timer = 0.0
 var walking_timer = 0.0
 var explosion_delay_timer = 0.0
 
+var damage_applied = false # Флаг для блокировки повторного урона
+
 # Explosion delay before animation starts
 @export var explosion_delay = 1.0
 
@@ -136,6 +138,9 @@ func chom_anim(movement):
 	# If the direction is not defined, use the "Idle_down" animation
 	if anim_name == "Idle_none":
 		anim_name = "Idle_down"
+		
+	if current_dir == "none":
+		current_dir = "down"
 
 	# Play the selected animation
 	anim.play(anim_name)
@@ -163,6 +168,7 @@ func _on_detected_body_exited(body):
 func _on_explosion_animation_finished():
 	print("Before emitting 'exploded' signal")
 	emit_signal("exploded", position)
+	damage_applied = false # Сбрасываем флаг после взрыва
 	queue_free()
 	
 func _on_explosion_keyframe():
@@ -170,4 +176,6 @@ func _on_explosion_keyframe():
 
 func _on_frame_changed():
 	if anim.frame == 8 and state == EXPLODING: # Проверяем кадр и состояние
-		emit_signal("exploded", global_position)
+		emit_signal("exploded", global_position, self)
+		
+

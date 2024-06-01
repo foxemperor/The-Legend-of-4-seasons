@@ -1120,6 +1120,22 @@ scale = Vector2(1, 0.761058)
 position = Vector2(1076, -54.7962)
 scale = Vector2(1, 1)
 
+[node name="Chom Bombs B2" parent="TileMap" instance=ExtResource("10_ndlvd")]
+position = Vector2(587, 53.2741)
+scale = Vector2(1, 0.761058)
+
+[node name="Chom Bombs B3" parent="TileMap" instance=ExtResource("10_ndlvd")]
+position = Vector2(805, 255.716)
+scale = Vector2(1, 0.761058)
+
+[node name="Chom Bombs B4" parent="TileMap" instance=ExtResource("10_ndlvd")]
+position = Vector2(1516, -19.7875)
+scale = Vector2(1, 0.761058)
+
+[node name="Chom Bombs B5" parent="TileMap" instance=ExtResource("10_ndlvd")]
+position = Vector2(693, -95.8933)
+scale = Vector2(1, 0.761058)
+
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_kmtlu")
 autoplay = true

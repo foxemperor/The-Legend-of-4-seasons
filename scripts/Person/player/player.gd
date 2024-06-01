@@ -14,7 +14,7 @@ signal health_changed
 @export var max_health = 5
 @onready var current_health: int = max_health
 
-@onready var explosion_radius = 1000 # Пример
+@onready var explosion_radius = 50 # Пример
 @onready var explosion_damage = 1 # Пример
 
 
@@ -29,6 +29,7 @@ var is_running = false
 var current_dir = "none"
 var idle_time = 0.0
 var in_group_player = false
+var hearts_container
 
 func _ready():
 	if is_in_group("player"):
@@ -37,8 +38,7 @@ func _ready():
 		add_to_group("player")
 	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
 	NavigationManager.level_loaded.connect(_on_level_loaded)
-	#get_tree().node_added.connect(_on_node_added) 
-	health_changed.connect(update_hearts)
+	hearts_container = get_node("../../CanvasLayer/HeartsContainer")
 
 func _process(delta):
 	if not Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down"):
@@ -49,10 +49,12 @@ func _process(delta):
 func _physics_process(delta):
 	hero_movement(delta)
 	for mob in get_tree().get_nodes_in_group("mob"):  # Проходим по всем мобам
-		if mob.anim.frame == 8 and mob.state == mob.EXPLODING:  # Проверяем, взрывается ли моб
+		if mob.anim.frame == 8 and mob.state == mob.EXPLODING and not mob.damage_applied:  # Проверяем, взрывается ли моб
 			var distance = global_position.distance_to(mob.global_position)
 			if distance < explosion_radius:
 				take_damage(1)
+				hearts_container.update_hearts(hearts_container.get_child_count())
+				mob.damage_applied = true
 				break  # Выходим из цикла, если урон уже нанесен
 
 func _on_level_loaded(destination_tag):
@@ -189,23 +191,9 @@ func block() -> void:
 
 func take_damage(damage):
 	print("Player takes damage:", damage)
-	var hearts_container = get_node("../../CanvasLayer/HeartsContainer") # Полный путь
 	hearts_container.update_hearts(hearts_container.get_child_count() - damage)
+	print("Current hearts:", hearts_container.get_child_count())
 	if hearts_container.get_child_count() <= 0:
 		queue_free()
 	
-func _on_node_added(node):
-	if node.is_in_group("mob"):
-		node.exploded.connect(_on_mob_exploded)
-
-func _on_mob_exploded(explosion_position):
-	print("Mob exploded at:", explosion_position)
-	var distance = global_position.distance_to(explosion_position)
-	if distance < explosion_radius:
-		take_damage(1)  # Уменьшаем здоровье на 1 сердечко
-
-func update_hearts(new_health: int):
-	var hearts_container = get_node("../../CanvasLayer/HeartsContainer")
-	$HeartsContainer.update_hearts(new_health)  # Обновляем hearts
-
 

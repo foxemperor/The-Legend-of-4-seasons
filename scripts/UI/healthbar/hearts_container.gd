@@ -12,6 +12,8 @@ func set_max_hearts(max: int):
 	update_hearts(max)  # Вызываем update_hearts после создания сердечек
 
 func update_hearts(current_health: int):
+	while get_child_count() > current_health:
+		remove_child(get_child(get_child_count() - 1))
 	var hearts = get_children()
 	
 	for i in range(current_health):
