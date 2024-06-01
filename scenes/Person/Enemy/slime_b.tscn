@@ -1,6 +1,6 @@
 [gd_scene load_steps=95 format=3 uid="uid://debcxihrulte3"]
 
-[ext_resource type="Script" path="res://scripts/Person/slime.gd" id="1_280v0"]
+[ext_resource type="Script" path="res://scripts/Person/Enemy/slime.gd" id="1_280v0"]
 [ext_resource type="Texture2D" uid="uid://fwar0x1x60c1" path="res://assets/Creatures/Slime/Blue Slime/momo_chomp.png" id="2_qebsw"]
 [ext_resource type="Texture2D" uid="uid://ds2uqqekydk0d" path="res://assets/Creatures/Slime/Blue Slime/momo_die_down.png" id="3_c0a11"]
 [ext_resource type="Texture2D" uid="uid://b6ugh41esxqu2" path="res://assets/Creatures/Slime/Blue Slime/momo_die_up.png" id="4_k6npr"]

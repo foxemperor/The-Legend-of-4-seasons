@@ -1,6 +1,6 @@
 extends Node
 
-const scene_level1 = preload("res://scenes/Locations/level_1.tscn")
+const scene_level1 = preload("res://scenes/Locations/test_scene.tscn")
 #const scene_level1 = preload("res://scenes/Locations/world_a_1_s.tscn")
 const scene_level2 = preload("res://scenes/Locations/world_a_2_s.tscn")
 

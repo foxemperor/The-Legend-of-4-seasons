@@ -9,7 +9,7 @@ signal health_changed
 @onready var sprite_idle = $SpriteIdle as Sprite2D
 @onready var sprite_attack = $SpriteAttack as Sprite2D
 
-@export var max_health = 3
+@export var max_health = 5
 @onready var current_health: int = max_health
 
 
@@ -24,9 +24,13 @@ var input = Vector2.ZERO
 var is_running = false
 var current_dir = "none"
 var idle_time = 0.0
-
+var in_group_player = false
 
 func _ready():
+	if is_in_group("player"):
+		in_group_player = true
+	else:
+		add_to_group("player")
 	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
 	NavigationManager.level_loaded.connect(_on_level_loaded)
 
@@ -193,3 +197,4 @@ func _on_hurt_box_area_entered(area):
 			current_health = max_health
 		health_changed.emit(current_health)
 	
+

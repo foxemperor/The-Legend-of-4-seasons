@@ -60,7 +60,8 @@ func toggle():
 # При нажатии на кнопку Новая игра
 func _on_new_pressed() -> void:
 	toggle()
-	get_tree().change_scene_to_file("res://scenes/Locations/world_a_1_s.tscn")
+	get_tree().change_scene_to_file("res://scenes/Locations/level_1.tscn")
+	#get_tree().change_scene_to_file("res://scenes/Locations/world_a_1_s.tscn")
 
 
 # При нажатии на кнопку Продолжить

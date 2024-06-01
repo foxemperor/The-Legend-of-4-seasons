@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://byli0j2xukfg7"]
 
-[ext_resource type="PackedScene" uid="uid://b438gm1iq1lj2" path="res://resources/characters/player/player.tscn" id="1_jkr31"]
+[ext_resource type="PackedScene" uid="uid://b438gm1iq1lj2" path="res://scenes/Person/Player/player.tscn" id="1_jkr31"]
 [ext_resource type="Script" path="res://scripts/Locations/world_a_1_s.gd" id="1_x7r5j"]
 [ext_resource type="Texture2D" uid="uid://dn8r8b5w0kxe5" path="res://assets/Landscapes/Forest/Summer/seasonal sample (summer).png" id="2_3i1l4"]
 [ext_resource type="Texture2D" uid="uid://bkltsxtqtf0f5" path="res://assets/Landscapes/Forest/Summer/(summer) cat tails and lily pads tileset.png" id="3_s3acg"]

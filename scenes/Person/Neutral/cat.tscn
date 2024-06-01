@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://eoe05dyj0qqy"]
 
-[ext_resource type="Script" path="res://scripts/Person/cat.gd" id="1_yoh25"]
+[ext_resource type="Script" path="res://scripts/Person/Neutral/cat.gd" id="1_yoh25"]
 [ext_resource type="Texture2D" uid="uid://ci7cchj53enq7" path="res://assets/Creatures/Cat/Cat_sprites.png" id="2_o33pt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s3qhu"]
