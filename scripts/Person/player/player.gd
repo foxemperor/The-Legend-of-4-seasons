@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 signal health_changed
 
+@onready var main_menu = preload("res://scenes/UI/main_menu.tscn")
+
 @onready var hurt_box = $HurtBox as Area2D
 
 @export var speed: int = 35
@@ -11,7 +13,7 @@ signal health_changed
 @onready var sprite_idle = $SpriteIdle as Sprite2D
 @onready var sprite_attack = $SpriteAttack as Sprite2D
 
-@export var max_health = 5
+@export var max_health = 2
 @onready var current_health: int = max_health
 
 @onready var explosion_radius = 50 # Пример
@@ -53,7 +55,6 @@ func _physics_process(delta):
 			var distance = global_position.distance_to(mob.global_position)
 			if distance < explosion_radius:
 				take_damage(1)
-				hearts_container.update_hearts(hearts_container.get_child_count())
 				mob.damage_applied = true
 				break  # Выходим из цикла, если урон уже нанесен
 
@@ -189,11 +190,13 @@ func block() -> void:
 		sprite_idle.visible = true
 		animation_player.play("stay_" + current_dir)
 
-func take_damage(damage):
+func take_damage(damage: int):
 	print("Player takes damage:", damage)
-	hearts_container.update_hearts(hearts_container.get_child_count() - damage)
+	current_health -= damage  # Обновляем значение current_health
+	hearts_container.update_hearts(current_health)
 	print("Current hearts:", hearts_container.get_child_count())
-	if hearts_container.get_child_count() <= 0:
-		queue_free()
+	print("Current hearts:", hearts_container.get_full_hearts())
+	if current_health <= 0:  # Проверяем current_health
+		get_tree().change_scene_to_packed(main_menu)
 	
 

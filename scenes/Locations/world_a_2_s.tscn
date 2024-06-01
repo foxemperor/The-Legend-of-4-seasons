@@ -781,7 +781,6 @@ layer_2/tile_data = PackedInt32Array(1310726, 1114112, 0, 1376262, 1114112, 1, 1
 
 [node name="Player" parent="TileMap" instance=ExtResource("4_qi8xo")]
 position = Vector2(87, 406)
-scale = Vector2(1, 1)
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_b4ivn")

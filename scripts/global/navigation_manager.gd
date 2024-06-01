@@ -23,7 +23,8 @@ func change_scene(scene_to_load):
 	get_tree().change_scene_to_packed(scene_to_load)
 	call_deferred("connect_and_emit", spawn_transporter_tag)
 	
-
+func restart_game():
+	get_tree().change_scene("res://scenes/Locations/test_scene.tscn")
 
 func connect_and_emit():
 	# Подключаем сигнал после загрузки сцены

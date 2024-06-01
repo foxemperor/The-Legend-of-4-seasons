@@ -1117,23 +1117,22 @@ position = Vector2(1214, 14.4601)
 scale = Vector2(1, 0.761058)
 
 [node name="Player" parent="TileMap" instance=ExtResource("12_eesrf")]
-position = Vector2(1076, -54.7962)
-scale = Vector2(1, 1)
+position = Vector2(1050, -31.9644)
 
 [node name="Chom Bombs B2" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(587, 53.2741)
+position = Vector2(1076, -118.725)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B3" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(805, 255.716)
+position = Vector2(1037, 92.8491)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B4" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(1516, -19.7875)
+position = Vector2(1194, -103.504)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B5" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(693, -95.8933)
+position = Vector2(970, -108.831)
 scale = Vector2(1, 0.761058)
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
