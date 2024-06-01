@@ -732,8 +732,9 @@ shape = SubResource("CapsuleShape2D_s3qhu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w8glr")
-animation = &"Idle_down"
+animation = &"Attack_up"
 autoplay = "Idle_down"
+frame = 7
 
 [node name="Detected" type="Area2D" parent="."]
 position = Vector2(-1, 0)

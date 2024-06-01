@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 signal health_changed
 
+@onready var hurt_box = $HurtBox as Area2D
+
 @export var speed: int = 35
 @onready var animation_player = $AnimationIdle as AnimationPlayer
 @onready var sprite_idle = $SpriteIdle as Sprite2D
@@ -12,6 +14,8 @@ signal health_changed
 @export var max_health = 5
 @onready var current_health: int = max_health
 
+@onready var explosion_radius = 1000 # Пример
+@onready var explosion_damage = 1 # Пример
 
 
 const MAX_SPEED = 70
@@ -33,7 +37,8 @@ func _ready():
 		add_to_group("player")
 	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
 	NavigationManager.level_loaded.connect(_on_level_loaded)
-
+	#get_tree().node_added.connect(_on_node_added) 
+	health_changed.connect(update_hearts)
 
 func _process(delta):
 	if not Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down"):
@@ -41,14 +46,17 @@ func _process(delta):
 	else:
 		idle_time = 0.0
 
-
 func _physics_process(delta):
 	hero_movement(delta)
-
+	for mob in get_tree().get_nodes_in_group("mob"):  # Проходим по всем мобам
+		if mob.anim.frame == 8 and mob.state == mob.EXPLODING:  # Проверяем, взрывается ли моб
+			var distance = global_position.distance_to(mob.global_position)
+			if distance < explosion_radius:
+				take_damage(1)
+				break  # Выходим из цикла, если урон уже нанесен
 
 func _on_level_loaded(destination_tag):
 	call_deferred("teleport_to_destination", destination_tag)
-
 
 func teleport_to_destination(destination_tag):
 	var destination_node = get_tree().get_root().find_node(destination_tag)
@@ -57,18 +65,15 @@ func teleport_to_destination(destination_tag):
 	else:
 		push_error("Destination node not found: " + destination_tag)
 
-
 func _unhandled_input(event):
 	if event is InputEventKey and event.is_action_pressed("ui_cancel"):
 		$CanvasLayer/PauseMenu.visible = !$CanvasLayer/PauseMenu.visible
 		get_tree().paused = $CanvasLayer/PauseMenu.visible
 
-
 func get_input():
 	input.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	input.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	return input.normalized()
-
 
 func _on_spawn(position: Vector2i, direction: String):
 	global_position = position
@@ -115,14 +120,12 @@ func hero_movement(delta):
 	hero_anim(input != Vector2.ZERO)
 	
 
-
 # Вспомогательная функция для определения направления
 func get_direction_name(input):
 	if abs(input.x) > abs(input.y):
 		return "right" if input.x > 0 else "left" 
 	else:
 		return "down" if input.y > 0 else "up"
-
 
 func hero_anim(movement):
 	var anim_name = "stay_" + current_dir
@@ -141,10 +144,8 @@ func hero_anim(movement):
 	
 	animation_player.play(anim_name)
 
-
 func runningcheck(is_running):
 	return is_running
-
 
 func attack() -> void:
 	sprite_attack.visible = true
@@ -169,7 +170,6 @@ func attack() -> void:
 	attack_timer = 0.0
 	attack_stage = (attack_stage + 1) % 3  # Циклическое переключение между этапами атаки
 
-
 func block() -> void:
 	if Input.is_action_pressed("block"):
 		sprite_attack.visible = true
@@ -186,15 +186,26 @@ func block() -> void:
 		sprite_attack.visible = false
 		sprite_idle.visible = true
 		animation_player.play("stay_" + current_dir)
+
+func take_damage(damage):
+	print("Player takes damage:", damage)
+	var hearts_container = get_node("../../CanvasLayer/HeartsContainer") # Полный путь
+	hearts_container.update_hearts(hearts_container.get_child_count() - damage)
+	if hearts_container.get_child_count() <= 0:
+		queue_free()
 	
+func _on_node_added(node):
+	if node.is_in_group("mob"):
+		node.exploded.connect(_on_mob_exploded)
 
+func _on_mob_exploded(explosion_position):
+	print("Mob exploded at:", explosion_position)
+	var distance = global_position.distance_to(explosion_position)
+	if distance < explosion_radius:
+		take_damage(1)  # Уменьшаем здоровье на 1 сердечко
 
+func update_hearts(new_health: int):
+	var hearts_container = get_node("../../CanvasLayer/HeartsContainer")
+	$HeartsContainer.update_hearts(new_health)  # Обновляем hearts
 
-func _on_hurt_box_area_entered(area):
-	if area.name == "HitBox":
-		current_health -= 1
-		if current_health <0:
-			current_health = max_health
-		health_changed.emit(current_health)
-	
 

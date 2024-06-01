@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var min_y = -200
 @export var max_y = 200
 
+
 # Current movement direction
 var direction = Vector2.DOWN
 
@@ -41,8 +42,12 @@ var explosion_delay_timer = 0.0
 # Reference to the AnimatedSprite2D node
 @onready var anim = $AnimatedSprite2D
 
+signal exploded(explosion_position)
+
 func _ready():
+	add_to_group("mob")
 	anim.animation_finished.connect(_on_explosion_animation_finished)
+	anim.frame_changed.connect(_on_frame_changed)
 
 func _physics_process(delta):
 	# Update timers
@@ -156,5 +161,13 @@ func _on_detected_body_exited(body):
 	enemy = null
 	
 func _on_explosion_animation_finished():
-	# Delete the mob
+	print("Before emitting 'exploded' signal")
+	emit_signal("exploded", position)
 	queue_free()
+	
+func _on_explosion_keyframe():
+	call_deferred("emit_signal", "exploded", global_position)
+
+func _on_frame_changed():
+	if anim.frame == 8 and state == EXPLODING: # Проверяем кадр и состояние
+		emit_signal("exploded", global_position)

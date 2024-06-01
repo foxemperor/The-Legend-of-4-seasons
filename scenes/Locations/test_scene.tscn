@@ -25,16 +25,22 @@ script/source = "extends Node2D
 
 func _ready():
 	hearts_container.set_max_hearts(player.max_health)
-	hearts_container.update_hearts(player.current_health)
 	player.health_changed.connect(hearts_container.update_hearts)
 	
 	if NavigationManager.spawn_transporter_tag != null:
 		_on_level_spawn(NavigationManager.spawn_transporter_tag)
+		
+	print(\"Player:\", player)
+	print(\"Hearts Container:\", hearts_container)
+	print(\"Signal 'health_changed' connected\")
 
 func _on_level_spawn(destination_tag: String):
 	var teleport_path = \"Teleports/Transporter_\" + destination_tag
 	var teleport = get_node(teleport_path) as Transporter
-	NavigationManager.trigger_player_spawn(teleport.spawn.global_position, teleport.spawn_direction)	
+	NavigationManager.trigger_player_spawn(teleport.spawn.global_position, teleport.spawn_direction)
+	player.health_changed.disconnect(hearts_container.update_hearts) 
+	player.health_changed.connect(hearts_container.update_hearts)
+	print(\"Signal 'health_changed' connected\")
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mq72k"]

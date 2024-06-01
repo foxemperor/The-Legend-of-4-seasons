@@ -634,13 +634,13 @@ sprite_frames = SubResource("SpriteFrames_w8glr")
 animation = &"Die_right"
 autoplay = "Idle_down"
 
-[node name="Detected" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detected"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_sb8ku")
 
-[connection signal="body_entered" from="Detected" to="." method="_on_detected_body_entered"]
-[connection signal="body_exited" from="Detected" to="." method="_on_detected_body_exited"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_detected_body_entered"]
+[connection signal="body_exited" from="HitBox" to="." method="_on_detected_body_exited"]

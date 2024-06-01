@@ -21,6 +21,8 @@ var current_dir = "none"
 # Enemy
 var enemy = null
 
+@onready var hit_box = $AnimatedSprite2D/HitBox as Area2D
+
 # States for the bee
 enum {
 	STANDING, # Standing still
