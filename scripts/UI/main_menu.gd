@@ -2,14 +2,14 @@ class_name MainMenu
 extends Control
 
 
-@onready var start_btn = $Menu/VBoxContainer/New as Button
-@onready var load_btn = $Menu/VBoxContainer/Load as Button
-@onready var exit_btn = $Menu/VBoxContainer/Exit as Button
-@onready var options_btn = $Menu/VBoxContainer/Options as Button
+@onready var start_btn = $Panel/Menu/VBoxContainer/New as Button
+@onready var load_btn = $Panel/Menu/VBoxContainer/Load as Button
+@onready var exit_btn = $Panel/Menu/VBoxContainer/Exit as Button
+@onready var options_btn = $Panel/Menu/VBoxContainer/Options as Button
 
-@onready var logo_container = $Logo
-@onready var menu_container = $Menu
-@onready var options_menu = $Options_menu as OptionsMenu
+@onready var logo_container = $Panel/Logo
+@onready var menu_container = $Panel/Menu
+@onready var options_menu = $Panel/Options_menu as OptionsMenu
 
 # Флаг для скрытия главного меню и видимости настроек
 var is_option_menu_visible = false
@@ -60,8 +60,7 @@ func toggle():
 # При нажатии на кнопку Новая игра
 func _on_new_pressed() -> void:
 	toggle()
-	# get_tree().change_scene_to_file("res://scenes/test_scene.tscn")
-	get_tree().change_scene_to_file("res://scenes/game_manager.tscn")
+	get_tree().change_scene_to_file("res://scenes/Locations/world_a_1_s.tscn")
 
 
 # При нажатии на кнопку Продолжить

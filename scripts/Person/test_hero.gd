@@ -26,7 +26,6 @@ func apply_damage(amount):
 
 func die():
 	print("Игрок погиб!")
-	# Добавьте логику смерти игрока (например, анимация, перезагрузка уровня)
 
 func _ready():
 	add_to_group("player")

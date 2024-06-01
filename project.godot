@@ -25,6 +25,7 @@ SaveManager="*res://autoscripts/save_manager.gd"
 InteractiveObject="*res://scripts/interactive_object.gd"
 MovableObject="*res://scripts/movable_object.gd"
 PickableObject="*res://scripts/pickable_object.gd"
+NavigationManager="*res://scripts/global/navigation_manager.gd"
 
 [display]
 

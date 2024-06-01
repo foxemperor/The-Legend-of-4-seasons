@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://lrjcqkemqsjt"]
+
+[ext_resource type="Script" path="res://scripts/UI/healthbar/heart_gui.gd" id="1_dvvqs"]
+[ext_resource type="Texture2D" uid="uid://cqdgt1ey07avu" path="res://assets/GUI/healthbar/heart.png" id="1_wo6cs"]
+
+[node name="HeartGUI" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(16, 13)
+offset_right = 16.0
+offset_bottom = 13.0
+script = ExtResource("1_dvvqs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("1_wo6cs")
+centered = false
+hframes = 5
