@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://n0hkutklgd65" path="res://assets/Landscapes/Forest/Summer/summer tree wall.png" id="5_mka0p"]
 [ext_resource type="Texture2D" uid="uid://bq2ypy1m8gxim" path="res://assets/Landscapes/Forest/Summer/summer water sparkles B 16x16.png" id="6_0my43"]
 [ext_resource type="Texture2D" uid="uid://dmom8bjgai8ud" path="res://assets/Landscapes/Forest/Summer/summer waterfall B 16x16.png" id="7_yjx4b"]
+[ext_resource type="PackedScene" uid="uid://bpvj07qhw1d3a" path="res://scenes/Object/bigbox.tscn" id="8_1prvx"]
 [ext_resource type="PackedScene" uid="uid://coee2awbpsl4k" path="res://scenes/Person/Enemy/goblin_sp.tscn" id="9_beop6"]
-[ext_resource type="PackedScene" uid="uid://bpvj07qhw1d3a" path="res://scenes/Object/box.tscn" id="9_jspwb"]
 [ext_resource type="PackedScene" uid="uid://c1kklxo65rfdd" path="res://scenes/Person/Enemy/chomb_b.tscn" id="10_ndlvd"]
 [ext_resource type="PackedScene" uid="uid://bvv1rjsjwjpdx" path="res://scenes/Person/Enemy/goblin.tscn" id="11_8qmnj"]
 [ext_resource type="PackedScene" uid="uid://b438gm1iq1lj2" path="res://scenes/Person/Player/player.tscn" id="12_eesrf"]
@@ -1100,8 +1100,8 @@ layer_4/name = "Лес"
 layer_4/y_sort_enabled = true
 layer_4/tile_data = PackedInt32Array(327794, 4, 0, 852082, 4, 0, -196494, 4, 0, -720782, 4, 0, 1376370, 4, 0, -851876, 720899, 0, 458824, 720899, 0, 87, 720899, 0, -262066, 720899, 0, -393162, 720899, 0, 589855, 720899, 0, -393187, 720899, 0, 327724, 720899, 0, 1114148, 720899, 0, 1179671, 720899, 0, 1048635, 720899, 0, 1048664, 720899, 0, 1900658, 4, 0, -1048496, 720899, 0, -786351, 720899, 0, -917419, 720899, 0)
 
-[node name="Box" parent="TileMap" instance=ExtResource("9_jspwb")]
-position = Vector2(1013, -63.1678)
+[node name="Box" parent="TileMap" instance=ExtResource("8_1prvx")]
+position = Vector2(1089, -29.6813)
 scale = Vector2(1, 0.761058)
 
 [node name="Goblin Spear" parent="TileMap" instance=ExtResource("9_beop6")]
@@ -1132,7 +1132,7 @@ position = Vector2(1194, -103.504)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B5" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(970, -108.831)
+position = Vector2(938, -105.787)
 scale = Vector2(1, 0.761058)
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -1,9 +1,11 @@
-[gd_scene load_steps=59 format=3 uid="uid://b438gm1iq1lj2"]
+[gd_scene load_steps=60 format=3 uid="uid://b438gm1iq1lj2"]
 
 [ext_resource type="Script" path="res://scripts/Person/player/player.gd" id="1_khsxg"]
 [ext_resource type="Texture2D" uid="uid://e2s78bxd4dh0" path="res://assets/Main Hero/main_hero.png" id="2_ugxy4"]
 [ext_resource type="Texture2D" uid="uid://cprtyoomqpwp5" path="res://assets/Main Hero/main_hero_attack.png" id="3_id0cb"]
 [ext_resource type="PackedScene" uid="uid://cxe7aglabkpej" path="res://scenes/UI/pause_menu.tscn" id="4_qp3rs"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xsg0s"]
 
 [sub_resource type="Animation" id="Animation_71dvv"]
 length = 0.001
@@ -250,7 +252,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_77liv"]
 resource_name = "die"
-length = 1.2
+length = 1.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -258,7 +260,7 @@ tracks/0/path = NodePath("SpriteIdle:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [280, 281, 282, 283, 284, 285]
@@ -941,6 +943,10 @@ texture = ExtResource("3_id0cb")
 hframes = 15
 vframes = 4
 
+[node name="SpriteDie" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("CompressedTexture2D_xsg0s")
+
 [node name="AnimationIdle" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_imxta")
@@ -968,3 +974,4 @@ zoom = Vector2(3, 3)
 visible = false
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurtbox_body_entered"]

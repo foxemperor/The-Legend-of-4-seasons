@@ -3,6 +3,7 @@ class_name Player
 extends CharacterBody2D
 
 signal health_changed
+signal death_finished
 
 @onready var main_menu = preload("res://scenes/UI/main_menu.tscn")
 
@@ -28,6 +29,7 @@ const RUN_SPEED_MULTIPLIER = 2  # Множитель скорости бега
 
 var input = Vector2.ZERO
 var is_running = false
+var is_death = false
 var current_dir = "none"
 var idle_time = 0.0
 var in_group_player = false
@@ -41,6 +43,7 @@ func _ready():
 	NavigationManager.on_trigger_player_spawn.connect(_on_spawn)
 	NavigationManager.level_loaded.connect(_on_level_loaded)
 	hearts_container = get_node("../../CanvasLayer/HeartsContainer")
+	set_physics_process(true) # Важно для `await`
 
 func _process(delta):
 	if not Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down"):
@@ -50,13 +53,15 @@ func _process(delta):
 
 func _physics_process(delta):
 	hero_movement(delta)
-	for mob in get_tree().get_nodes_in_group("mob"):  # Проходим по всем мобам
-		if mob.anim.frame == 8 and mob.state == mob.EXPLODING and not mob.damage_applied:  # Проверяем, взрывается ли моб
-			var distance = global_position.distance_to(mob.global_position)
-			if distance < explosion_radius:
-				take_damage(1)
-				mob.damage_applied = true
-				break  # Выходим из цикла, если урон уже нанесен
+	if is_death == false:
+		for mob in get_tree().get_nodes_in_group("mob"):  # Проходим по всем мобам
+			if mob.has_method("get_tree") and mob.anim is Node: # Проверка, есть ли у mob метод get_tree
+				if mob.anim.frame == 8 and mob.state == mob.EXPLODING and not mob.damage_applied:  # Проверяем, взрывается ли моб
+					var distance = global_position.distance_to(mob.global_position)
+					if distance < explosion_radius:
+						take_damage(1)
+						mob.damage_applied = true
+						break  # Выходим из цикла, если урон уже нанесен
 
 func _on_level_loaded(destination_tag):
 	call_deferred("teleport_to_destination", destination_tag)
@@ -116,6 +121,11 @@ func hero_movement(delta):
 	if Input.is_action_pressed("block"):
 			block()
 	
+	if current_health == 0 and not is_death:
+		
+		is_death = true
+		animation_player.play("die") # Проигрываем анимацию смерти
+		
 	# Перемещаем персонажа
 	move_and_slide()
 	
@@ -131,6 +141,13 @@ func get_direction_name(input):
 		return "down" if input.y > 0 else "up"
 
 func hero_anim(movement):
+	# Сначала проверяем, не должна ли воспроизводиться анимация смерти
+	if is_death:
+		animation_player.play("die")
+		await get_tree().create_timer(animation_player.get_animation("die").get_length()).timeout 
+		emit_signal("death_finished")
+		return  # Выходим из функции, если смерть происходит
+	
 	var anim_name = "stay_" + current_dir
 	if anim_name == "stay_none":
 		anim_name = "stay_down"
@@ -194,9 +211,19 @@ func take_damage(damage: int):
 	print("Player takes damage:", damage)
 	current_health -= damage  # Обновляем значение current_health
 	hearts_container.update_hearts(current_health)
-	print("Current hearts:", hearts_container.get_child_count())
+	print("Max hearts:", hearts_container.get_child_count())
 	print("Current hearts:", hearts_container.get_full_hearts())
-	if current_health <= 0:  # Проверяем current_health
-		get_tree().change_scene_to_packed(main_menu)
+	if current_health <= 0 and not is_death:
+		is_death = true
+		connect("death_finished", Callable(self, "_on_death_finished"))
+
 	
+func _on_hurtbox_body_entered(body):
+	if body.is_in_group("mob"):
+		take_damage(1)
+		velocity = body.global_position.direction_to(global_position) * 10 # Отталкивание
+	
+func _on_death_finished(): # Обработчик сигнала
+	await get_tree().change_scene_to_packed(main_menu)
+	disconnect("death_finished", Callable(self, "_on_death_finished")) # Отключаем сигнал
 
