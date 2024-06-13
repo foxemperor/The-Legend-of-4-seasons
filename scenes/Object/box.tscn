@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfp41nxrtqpc2"]
+
+[ext_resource type="Script" path="res://scripts/Object/box.gd" id="1_k4ytl"]
+[ext_resource type="Texture2D" uid="uid://cv3vntyud50gk" path="res://assets/Objects/Village Extras/village accessories 16x32.png" id="2_rnrun"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvmfr"]
+size = Vector2(16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnlea"]
+atlas = ExtResource("2_rnrun")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xfes0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnlea")
+}],
+"loop": true,
+"name": &"Box",
+"speed": 5.0
+}]
+
+[node name="Box" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_k4ytl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+shape = SubResource("RectangleShape2D_jvmfr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xfes0")
+animation = &"Box"
+
+[node name="area" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 15
+
+[node name="boxCollision" type="CollisionShape2D" parent="area"]
+z_index = 1
+y_sort_enabled = true
+shape = SubResource("RectangleShape2D_jvmfr")
+
+[connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]
+[connection signal="body_exited" from="area" to="." method="_on_area_body_exited"]

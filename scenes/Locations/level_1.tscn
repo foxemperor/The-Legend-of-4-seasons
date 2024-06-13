@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bxno1xsm3vw2y"]
 
-[ext_resource type="PackedScene" uid="uid://gpg6gw2ft18d" path="res://scenes/test_scene.tscn" id="1_c7p7g"]
+[ext_resource type="PackedScene" uid="uid://gpg6gw2ft18d" path="res://scenes/Locations/test_scene.tscn" id="1_w4gts"]
 
 [node name="Level1" type="Node2D"]
 process_mode = 1
 
-[node name="Test_world" parent="." instance=ExtResource("1_c7p7g")]
+[node name="Test_world" parent="." instance=ExtResource("1_w4gts")]

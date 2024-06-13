@@ -22,6 +22,9 @@ config/icon="res://icon.svg"
 SettingsSignalBus="*res://autoscripts/settings_signal_bus.gd"
 SettingsDataContainer="*res://autoscripts/settings_datacontainer.gd"
 SaveManager="*res://autoscripts/save_manager.gd"
+InteractiveObject="*res://scripts/interactive_object.gd"
+MovableObject="*res://scripts/global/movable_object.gd"
+PickableObject="*res://scripts/pickable_object.gd"
 NavigationManager="*res://scripts/global/navigation_manager.gd"
 
 [display]
@@ -29,9 +32,8 @@ NavigationManager="*res://scripts/global/navigation_manager.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=768
 window/size/resizable=false
-window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
-window/vsync/vsync_mode=0
 
 [input]
 
@@ -84,6 +86,16 @@ action={
 [layer_names]
 
 2d_render/layer_1="ground"
+2d_render/layer_2="player"
+2d_render/layer_3="enemy"
+2d_render/layer_4="other"
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemy"
+2d_physics/layer_3="other"
+
+[physics]
+
+2d/default_gravity=0.0
 
 [rendering]
 

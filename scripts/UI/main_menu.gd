@@ -10,9 +10,13 @@ extends Control
 @onready var logo_container = $Panel/Logo
 @onready var menu_container = $Panel/Menu
 @onready var options_menu = $Panel/Options_menu as OptionsMenu
+@onready var credits_menu = $Panel/Authors as Control
+
 
 # Флаг для скрытия главного меню и видимости настроек
 var is_option_menu_visible = false
+# Флаг для скрытия главного меню и видимости авторов
+var is_credits_visible = false
 # Индекс выбранной кнопки
 var selected_buttons_index = 0
 # Флаг указывающий, что кнопка выделена с клавиатуры
@@ -60,7 +64,7 @@ func toggle():
 # При нажатии на кнопку Новая игра
 func _on_new_pressed() -> void:
 	toggle()
-	get_tree().change_scene_to_file("res://scenes/Locations/world_a_1_s.tscn")
+	get_tree().change_scene_to_file("res://scenes/Locations/level_1.tscn")
 
 
 # При нажатии на кнопку Продолжить
@@ -76,7 +80,15 @@ func _on_options_pressed() -> void:
 
 # При нажатии на кнопку Авторы
 func _on_credits_pressed() -> void:
-	pass
+	# Скрываем главное меню
+	menu_container.visible = false
+	# Показывать меню авторов
+	credits_menu.visible = true 
+	# Отключаем обработку событий для главного меню
+	set_process(false)
+	
+	# Передача ссылки на главное меню
+	credits_menu.main_menu = self
 
 
 # При нажатии на кнопку Выход
