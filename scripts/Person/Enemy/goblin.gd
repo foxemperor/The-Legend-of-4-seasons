@@ -39,6 +39,9 @@ var walking_timer = 0.0
 
 @onready var anim = $AnimatedSprite2D
 
+func _ready():
+	add_to_group("mob")
+
 func _physics_process(delta):
 	# Обновляем таймеры
 	standing_timer += delta
