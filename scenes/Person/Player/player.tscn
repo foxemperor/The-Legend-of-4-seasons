@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://b438gm1iq1lj2"]
+[gd_scene load_steps=61 format=3 uid="uid://b438gm1iq1lj2"]
 
 [ext_resource type="Script" path="res://scripts/Person/player/player.gd" id="1_khsxg"]
 [ext_resource type="Texture2D" uid="uid://e2s78bxd4dh0" path="res://assets/Main Hero/main_hero.png" id="2_ugxy4"]
@@ -926,6 +926,9 @@ size = Vector2(14, 5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7oh7g"]
 size = Vector2(14, 18)
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_4keqi"]
+points = PackedVector2Array(0, 0, 10, 20, -10, 20)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
@@ -988,6 +991,15 @@ grow_vertical = 2
 theme = ExtResource("5_e04fs")
 theme_override_font_sizes/font_size = 60
 text = "ИГРА ОКОНЧЕНА"
+
+[node name="AttackArea" type="Area2D" parent="."]
+position = Vector2(0, 1)
+collision_layer = 2
+collision_mask = 2
+
+[node name="TriangleCollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, 1)
+shape = SubResource("ConvexPolygonShape2D_4keqi")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurtbox_body_entered"]

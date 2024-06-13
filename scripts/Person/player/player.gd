@@ -23,6 +23,9 @@ signal attack_finished
 @onready var explosion_radius = 50 # Пример
 @onready var explosion_damage = 1 # Пример
 
+@onready var attack_area = $AttackArea as Area2D
+@onready var triangle_collision = $AttackArea/TriangleCollisionShape2D as CollisionShape2D
+@onready var triangle_polygon = triangle_collision.shape as ConvexPolygonShape2D
 
 const MAX_SPEED = 70
 const ACCEL = 1500
@@ -40,8 +43,7 @@ var idle_time = 0.0
 var in_group_player = false
 var hearts_container
 
-func _ready():
-	
+func _ready():	
 	if is_in_group("player"):
 		in_group_player = true
 	else:
@@ -50,12 +52,15 @@ func _ready():
 	NavigationManager.level_loaded.connect(_on_level_loaded)
 	hearts_container = get_node("../../CanvasLayer/HeartsContainer")
 	set_physics_process(true) # Важно для `await`
+	attack_area.connect("body_entered", Callable(self, "_on_attack_area_body_entered"))
+	_update_attack_area()  # Начальная инициализация треугольника
 
 func _process(delta):
 	if not Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down"):
 		idle_time += delta
 	else:
 		idle_time = 0.0
+	_update_attack_area()
 
 func _physics_process(delta):
 	hero_movement(delta)
@@ -68,6 +73,10 @@ func _physics_process(delta):
 						take_damage(1)
 						mob.damage_applied = true
 						break  # Выходим из цикла, если урон уже нанесен
+	if is_attacking and animation_player.is_playing() and animation_player.get_current_animation_length() <= animation_player.get_current_animation_position():
+		is_attacking = false
+		sprite_attack.visible = false
+		sprite_idle.visible = true
 
 func _on_level_loaded(destination_tag):
 	call_deferred("teleport_to_destination", destination_tag)
@@ -125,8 +134,9 @@ func hero_movement(delta):
 	
 	## Проверяем атаку
 	if Input.is_action_pressed("attack"):
-		is_attacking = true
+		is_attacking = true		
 		connect("attack_finished", Callable(self, "_on_animation_finished()"))
+		disconnect("attack_finished", Callable(self, "_on_animation_finished()"))
 
 		## Запускаем анимацию атаки 
 		var attack_name = "attack_" + current_dir
@@ -206,6 +216,7 @@ func hero_anim(movement):
 		animation_player.play(attack_name)
 		await get_tree().create_timer(animation_player.get_animation(attack_name).get_length()).timeout 
 		emit_signal("attack_finished")
+		take_damage(0)
 		return  # Выходим из функции
 	
 	var anim_name = "stay_" + current_dir
@@ -222,8 +233,7 @@ func hero_anim(movement):
 	if idle_time > 5.0:
 		anim_name = ("wait_" + current_dir)
 		if anim_name == "wait_none":
-			anim_name = "wait_down"
-	
+			anim_name = "wait_down"	
 	
 	animation_player.play(anim_name)
 
@@ -255,3 +265,47 @@ func _on_hurtbox_body_entered(body):
 func _on_death_finished(): # Обработчик сигнала
 	await get_tree().change_scene_to_packed(main_menu)
 	disconnect("death_finished", Callable(self, "_on_death_finished")) # Отключаем сигнал
+
+func _update_attack_area():
+	# Определяем точки треугольника
+	var size_1 = 20  # Размер треугольника
+	var size_2 = 20  # Размер треугольника
+	var points = [
+		Vector2(0, 0),
+		Vector2(size_1, size_2),
+		Vector2(-size_1, size_2)
+	]
+
+	# Поворачиваем КАЖДУЮ точку треугольника по направлению персонажа
+	for i in range(points.size()):
+		points[i] = points[i].rotated(deg_to_rad(get_direction_angle()))  # Поворачиваем каждую точку
+
+	# Обновляем форму треугольника
+	triangle_polygon.points = points
+
+func get_direction_angle():
+	# Возвращает угол направления в градусах
+	if current_dir == "right":
+		return 270
+	elif current_dir == "left":
+		return 90
+	elif current_dir == "up":
+		return 180
+	elif current_dir == "down":
+		return 0
+	else:
+		return 0
+
+func _on_attack_area_body_entered(body):
+	if body.is_in_group("mob"):
+		body.take_damage(1)
+		
+func _on_mob_damage_taken(damage_amount, mob_instance):
+	print("Мобу нанесли урон в размере:", damage_amount)
+	 # Обновите значение current_health моба, который получил урон
+	mob_instance.current_health -= damage_amount 
+	if mob_instance.current_health <= 0:
+		print("Моб умер!")
+		# Например, вызовите анимацию смерти
+		mob_instance.anim.play("Die") 
+		mob_instance.queue_free()

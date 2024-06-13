@@ -1099,9 +1099,13 @@ layer_3/tile_data = PackedInt32Array(-851945, 393219, 4, -786409, 393219, 5, -72
 layer_4/name = "Лес"
 layer_4/y_sort_enabled = true
 layer_4/tile_data = PackedInt32Array(327794, 4, 0, 852082, 4, 0, -196494, 4, 0, -720782, 4, 0, 1376370, 4, 0, -851876, 720899, 0, 458824, 720899, 0, 87, 720899, 0, -262066, 720899, 0, -393162, 720899, 0, 589855, 720899, 0, -393187, 720899, 0, 327724, 720899, 0, 1114148, 720899, 0, 1179671, 720899, 0, 1048635, 720899, 0, 1048664, 720899, 0, 1900658, 4, 0, -1048496, 720899, 0, -786351, 720899, 0, -917419, 720899, 0)
+layer_5/name = "Камни"
+layer_5/y_sort_enabled = true
+layer_5/z_index = 1
+layer_5/tile_data = PackedInt32Array(-327591, 196611, 14, -262055, 196611, 14, -196519, 196611, 14, -65447, 196611, 14, 89, 196611, 14, 65625, 196611, 14, -327589, 196611, 14, 65627, 196611, 14, -327587, 196611, 14, 65629, 196611, 14, -327585, 196611, 14, 65631, 196611, 14, -327583, 196611, 14, 65633, 196611, 14, -327581, 196611, 14, -262045, 196611, 14, -196509, 196611, 14, -65437, 196611, 14, 99, 196611, 14, 65635, 196611, 14)
 
 [node name="Box" parent="TileMap" instance=ExtResource("8_1prvx")]
-position = Vector2(1089, -29.6813)
+position = Vector2(1471, -57.0794)
 scale = Vector2(1, 0.761058)
 
 [node name="Goblin Spear" parent="TileMap" instance=ExtResource("9_beop6")]
@@ -1160,5 +1164,11 @@ transform = Transform2D(5, 0, 0, 5, 0, 0)
 
 [node name="HeartsContainer" parent="CanvasLayer" instance=ExtResource("15_15d6v")]
 offset_top = -3.05176e-05
+
+[node name="Box" parent="." instance=ExtResource("8_1prvx")]
+position = Vector2(1195, 182)
+
+[node name="Box2" parent="." instance=ExtResource("8_1prvx")]
+position = Vector2(1195, 217)
 
 [editable path="Teleports/Transporter_E"]

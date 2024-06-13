@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dmain287komjs" path="res://assets/Objects/Village Extras/village accessories 32x64.png" id="2_2328f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jvmfr"]
-size = Vector2(40, 64)
+size = Vector2(40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxtrb"]
 atlas = ExtResource("2_2328f")
@@ -25,12 +25,16 @@ animations = [{
 z_index = 1
 y_sort_enabled = true
 collision_layer = 0
-collision_mask = 0
+collision_mask = 15
+collision_priority = 0.0
+slide_on_ceiling = false
+safe_margin = 1.0
 script = ExtResource("1_eb6av")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_jvmfr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -43,10 +47,12 @@ animation = &"Box"
 [node name="area" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 15
+gravity = 1500.0
 
 [node name="boxCollision" type="CollisionShape2D" parent="area"]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_jvmfr")
 
 [connection signal="body_entered" from="area" to="." method="_on_area_body_entered"]
