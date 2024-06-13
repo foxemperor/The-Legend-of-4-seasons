@@ -4,10 +4,6 @@ extends CharacterBody2D
 
 signal health_changed
 signal death_finished
-<<<<<<< Updated upstream
-=======
-signal attack_finished
->>>>>>> Stashed changes
 
 @onready var main_menu = preload("res://scenes/UI/main_menu.tscn")
 
@@ -17,11 +13,6 @@ signal attack_finished
 @onready var animation_player = $AnimationIdle as AnimationPlayer
 @onready var sprite_idle = $SpriteIdle as Sprite2D
 @onready var sprite_attack = $SpriteAttack as Sprite2D
-<<<<<<< Updated upstream
-=======
-@onready var game_over = $CanvasLayer/GameOver
-
->>>>>>> Stashed changes
 
 @export var max_health = 2
 @onready var current_health: int = max_health
@@ -39,21 +30,12 @@ const RUN_SPEED_MULTIPLIER = 2  # Множитель скорости бега
 var input = Vector2.ZERO
 var is_running = false
 var is_death = false
-<<<<<<< Updated upstream
-=======
-var is_blocked = false
-var is_attacking = false
->>>>>>> Stashed changes
 var current_dir = "none"
 var idle_time = 0.0
 var in_group_player = false
 var hearts_container
 
 func _ready():
-<<<<<<< Updated upstream
-=======
-	
->>>>>>> Stashed changes
 	if is_in_group("player"):
 		in_group_player = true
 	else:
@@ -108,11 +90,7 @@ func _on_spawn(position: Vector2i, direction: String):
 
 
 func hero_movement(delta):
-<<<<<<< Updated upstream
 	input = get_input()
-=======
-	input = get_input()	
->>>>>>> Stashed changes
 	
 	# Проверяем, клавиши
 	is_running = Input.is_action_pressed("run")
@@ -123,7 +101,6 @@ func hero_movement(delta):
 	if is_running == true:
 		speed_multiplier = RUN_SPEED_MULTIPLIER
 	
-<<<<<<< Updated upstream
 	# Обновляем направление персонажа
 	if input != Vector2.ZERO:
 		current_dir = get_direction_name(input)
@@ -144,69 +121,6 @@ func hero_movement(delta):
 	if Input.is_action_pressed("block"):
 			block()
 	
-=======
-	# Проверяем блок перед обработкой движения
-	if is_blocked == false:
-		# Обновляем направление персонажа
-		if input != Vector2.ZERO:
-			current_dir = get_direction_name(input)
-	
-		# Обновляем скорость персонажа
-		if input == Vector2.ZERO:
-			if velocity.length() > (FRICTION * delta):
-				velocity -= velocity.normalized() * (FRICTION * delta)
-			else:
-				velocity = Vector2.ZERO
-		else:
-			velocity += (input * ACCEL * delta * speed_multiplier)
-			velocity = velocity.limit_length(MAX_SPEED * speed_multiplier)
-	
-	## Проверяем атаку
-	if Input.is_action_pressed("attack"):
-		is_attacking = true
-		connect("attack_finished", Callable(self, "_on_animation_finished()"))
-
-		## Запускаем анимацию атаки 
-		var attack_name = "attack_" + current_dir
-		if attack_name == "attack_none":
-			attack_name = "attack_down"
-
-		# Останавливаем движение
-		velocity = Vector2.ZERO
-		input = Vector2.ZERO 
-
-	else:
-		is_attacking = false
-		sprite_attack.visible = false
-		sprite_idle.visible = true
-	
-	# Проверяем блок
-	if Input.is_action_pressed("block"):
-		is_blocked = true
-		sprite_attack.visible = true
-		sprite_idle.visible = false
-		
-		# Запускаем анимацию блока 
-		var block_name = "block_" + current_dir
-		if block_name == "block_none":
-			block_name = "block_down"
-		animation_player.play(block_name)
-
-		# Останавливаем движение
-		velocity = Vector2.ZERO
-		input = Vector2.ZERO 
-		
-		# Продолжаем воспроизводить анимацию, пока кнопка зажата
-		if animation_player.is_playing() and animation_player.get_current_animation_length() > 0.0: 
-			animation_player.seek(0.0) # Возвращаем анимацию в начало
-
-	else:
-		is_blocked = false
-		sprite_attack.visible = false
-		sprite_idle.visible = true
-	
-	# Проверка для анимации смерти игрока
->>>>>>> Stashed changes
 	if current_health == 0 and not is_death:
 		
 		is_death = true
@@ -229,41 +143,17 @@ func get_direction_name(input):
 func hero_anim(movement):
 	# Сначала проверяем, не должна ли воспроизводиться анимация смерти
 	if is_death:
-<<<<<<< Updated upstream
-=======
-		game_over.visible = true
->>>>>>> Stashed changes
 		animation_player.play("die")
 		await get_tree().create_timer(animation_player.get_animation("die").get_length()).timeout 
 		emit_signal("death_finished")
 		return  # Выходим из функции, если смерть происходит
 	
-<<<<<<< Updated upstream
-=======
-	if is_attacking:
-		sprite_attack.visible = true
-		sprite_idle.visible = false
-		
-		var attack_name = "attack_" + current_dir
-		if attack_name == "attack_none":
-			attack_name = "attack_down"
-		animation_player.play(attack_name)
-		await get_tree().create_timer(animation_player.get_animation(attack_name).get_length()).timeout 
-		emit_signal("attack_finished")
-		return  # Выходим из функции
-	
->>>>>>> Stashed changes
 	var anim_name = "stay_" + current_dir
 	if anim_name == "stay_none":
 		anim_name = "stay_down"
 	
 	if movement:
 		anim_name = "walk_" + current_dir
-<<<<<<< Updated upstream
-=======
-		if anim_name == "walk_none":
-			anim_name = "walk_down"
->>>>>>> Stashed changes
 		if is_running:
 			anim_name = "run_" + current_dir  # Используем анимацию бега
 	
@@ -272,16 +162,11 @@ func hero_anim(movement):
 		if anim_name == "wait_none":
 			anim_name = "wait_down"
 	
-<<<<<<< Updated upstream
-=======
-	
->>>>>>> Stashed changes
 	animation_player.play(anim_name)
 
 func runningcheck(is_running):
 	return is_running
 
-<<<<<<< Updated upstream
 func attack() -> void:
 	sprite_attack.visible = true
 	sprite_idle.visible = false
@@ -326,40 +211,19 @@ func take_damage(damage: int):
 	print("Player takes damage:", damage)
 	current_health -= damage  # Обновляем значение current_health
 	hearts_container.update_hearts(current_health)
-=======
-func take_damage(damage: int):
-	print("Player takes damage:", damage)
-	if is_blocked == false:
-		current_health -= damage  # Обновляем значение current_health
-		hearts_container.update_hearts(current_health)
-	
->>>>>>> Stashed changes
 	print("Max hearts:", hearts_container.get_child_count())
 	print("Current hearts:", hearts_container.get_full_hearts())
 	if current_health <= 0 and not is_death:
 		is_death = true
 		connect("death_finished", Callable(self, "_on_death_finished"))
 
-<<<<<<< Updated upstream
 	
 func _on_hurtbox_body_entered(body):
 	if body.is_in_group("mob"):
-=======
-func _on_animation_finished():
-	is_attacking = false
-	sprite_attack.visible = false
-	sprite_idle.visible = true
-
-func _on_hurtbox_body_entered(body):
-	if body.is_in_group("mob") and not is_blocked:
->>>>>>> Stashed changes
 		take_damage(1)
 		velocity = body.global_position.direction_to(global_position) * 10 # Отталкивание
 	
 func _on_death_finished(): # Обработчик сигнала
 	await get_tree().change_scene_to_packed(main_menu)
 	disconnect("death_finished", Callable(self, "_on_death_finished")) # Отключаем сигнал
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes

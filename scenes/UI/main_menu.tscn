@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7pmqtaeidvhw"]
+[gd_scene load_steps=8 format=3 uid="uid://c7pmqtaeidvhw"]
 
 [ext_resource type="Theme" uid="uid://bwqig88kcvpte" path="res://assets/GUI/gui_default_theme.tres" id="1_2jnla"]
 [ext_resource type="Script" path="res://scripts/UI/main_menu.gd" id="1_35u0x"]
@@ -7,7 +7,6 @@
 [ext_resource type="FontFile" uid="uid://ybic0uytbk8e" path="res://assets/GUI/FsSongarak1Regular.ttf" id="4_ytkxx"]
 [ext_resource type="PackedScene" uid="uid://b3xbqylvxq7p4" path="res://scenes/UI/options_menu.tscn" id="6_60vy2"]
 [ext_resource type="AudioStream" uid="uid://be1ikmdisht0w" path="res://audio/music/Origins.ogg" id="7_jgi32"]
-[ext_resource type="PackedScene" uid="uid://drojvckwbebyw" path="res://scenes/UI/authors.tscn" id="7_oyrww"]
 
 [node name="Main_menu" type="Control"]
 layout_mode = 3
@@ -28,7 +27,6 @@ grow_vertical = 2
 
 [node name="Background" type="TextureRect" parent="Panel"]
 clip_contents = true
-custom_minimum_size = Vector2(1280, 768)
 layout_mode = 0
 offset_right = 2560.0
 offset_bottom = 1536.0
@@ -124,10 +122,6 @@ text = "Выход"
 visible = false
 layout_mode = 2
 anchors_preset = 0
-
-[node name="Authors" parent="Panel" instance=ExtResource("7_oyrww")]
-visible = false
-layout_mode = 1
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_jgi32")
