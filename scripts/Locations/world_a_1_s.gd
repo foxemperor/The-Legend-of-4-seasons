@@ -1,8 +1,7 @@
 extends Node2D
 
 @onready var hearts_container = $CanvasLayer/HeartsContainer
-@onready var player = $Player
-
+@onready var player = $TileMap/Player
 
 func _ready():
 	hearts_container.set_max_hearts(player.max_health)

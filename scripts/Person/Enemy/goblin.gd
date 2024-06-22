@@ -38,6 +38,11 @@ var standing_timer = 0.0
 var walking_timer = 0.0
 
 @onready var anim = $AnimatedSprite2D
+@onready var health = get_node("AnimatedSprite2D").get_parent()
+
+var current_health = 1 #  Хп моба
+var damage = 1 # Урон
+var damage_applied = false
 
 func _ready():
 	add_to_group("mob")
@@ -46,6 +51,11 @@ func _physics_process(delta):
 	# Обновляем таймеры
 	standing_timer += delta
 	walking_timer += delta
+	if current_health <= 0:
+		await get_tree().create_timer(1.0).timeout
+		anim.play("Die_" + current_dir)
+		if anim.frame == 3:
+			queue_free()
 
 	# Машина состояний
 	match state:
@@ -147,3 +157,25 @@ func _on_detected_body_exited(body):
 	#print("Body exited!")
 	enemy = null
 
+func take_damage(damage: int):
+	if damage_applied == false:
+		damage_applied = true
+		print("Моб получил урон:", damage)
+		current_health -= damage
+	#if current_health <= 0:
+		#state = STANDING
+		#anim.play("Die")  # Анимация смерти
+		#return  # Выходим, чтобы не запускать анимацию урона
+	#else:
+		## Запускаем анимацию урона
+		#var hurt_animation = "Hurt_" + current_dir
+		#anim.play(hurt_animation)  # Анимация урона
+		#emit_signal("damage_taken", damage, self)
+
+
+#func _on_animation_finished():
+	#if anim.animation == "Die_" + current_dir: 
+		#queue_free()
+	#elif anim.animation == "Hurt_" + current_dir: 
+		## После анимации урона, переключитесь на анимацию ожидания
+		#anim.play("Idle_" + current_dir)

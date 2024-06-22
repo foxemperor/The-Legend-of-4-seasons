@@ -3,6 +3,7 @@ extends Node
 const scene_level1 = preload("res://scenes/Locations/test_scene.tscn")
 #const scene_level1 = preload("res://scenes/Locations/world_a_1_s.tscn")
 const scene_level2 = preload("res://scenes/Locations/world_a_2_s.tscn")
+const scene_level3 = preload("res://scenes/Locations/world_a_1_s.tscn")
 
 var spawn_transporter_tag
 
@@ -40,7 +41,10 @@ func get_level_scene(level_tag: String) -> PackedScene:
 			return scene_level1
 		"world_A2":
 			return scene_level2
-		
+		"world_A3":
+			return scene_level3
+			
+			
 		_:
 			return null
 

@@ -619,7 +619,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e7adb")
 }],
-"loop": true,
+"loop": false,
 "name": &"Die_down",
 "speed": 5.0
 }, {
@@ -636,7 +636,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8hukw")
 }],
-"loop": true,
+"loop": false,
 "name": &"Die_left",
 "speed": 5.0
 }, {
@@ -653,7 +653,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0a35a")
 }],
-"loop": true,
+"loop": false,
 "name": &"Die_right",
 "speed": 5.0
 }, {
@@ -670,7 +670,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xowpy")
 }],
-"loop": true,
+"loop": false,
 "name": &"Die_up",
 "speed": 5.0
 }, {
@@ -1067,7 +1067,7 @@ shape = SubResource("CapsuleShape2D_s3qhu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w8glr")
-animation = &"Spin_right"
+animation = &"Die_up"
 autoplay = "Idle_down"
 
 [node name="Detected" type="Area2D" parent="."]

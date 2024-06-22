@@ -1109,34 +1109,46 @@ position = Vector2(1471, -57.0794)
 scale = Vector2(1, 0.761058)
 
 [node name="Goblin Spear" parent="TileMap" instance=ExtResource("9_beop6")]
-position = Vector2(956, 22.0707)
+position = Vector2(802, 36.5308)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(1091, 12.1769)
+position = Vector2(1056, 92.8491)
 scale = Vector2(1, 0.761058)
 
 [node name="Goblin" parent="TileMap" instance=ExtResource("11_8qmnj")]
 position = Vector2(1214, 14.4601)
 scale = Vector2(1, 0.761058)
 
+[node name="Goblin3" parent="TileMap" instance=ExtResource("11_8qmnj")]
+position = Vector2(1073, -109.592)
+scale = Vector2(1, 0.761058)
+
 [node name="Player" parent="TileMap" instance=ExtResource("12_eesrf")]
 position = Vector2(1050, -31.9644)
 
 [node name="Chom Bombs B2" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(1076, -118.725)
+position = Vector2(713, -136.229)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B3" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(1037, 92.8491)
+position = Vector2(902, 98.9376)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B4" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(1194, -103.504)
+position = Vector2(851, -140.035)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B5" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(938, -105.787)
+position = Vector2(717, -41.0971)
+scale = Vector2(1, 0.761058)
+
+[node name="Box2" parent="TileMap" instance=ExtResource("8_1prvx")]
+position = Vector2(1512, -31.2034)
+scale = Vector2(1, 0.761058)
+
+[node name="Box3" parent="TileMap" instance=ExtResource("8_1prvx")]
+position = Vector2(1512, -4.56636)
 scale = Vector2(1, 0.761058)
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -1164,11 +1176,5 @@ transform = Transform2D(5, 0, 0, 5, 0, 0)
 
 [node name="HeartsContainer" parent="CanvasLayer" instance=ExtResource("15_15d6v")]
 offset_top = -3.05176e-05
-
-[node name="Box" parent="." instance=ExtResource("8_1prvx")]
-position = Vector2(1195, 182)
-
-[node name="Box2" parent="." instance=ExtResource("8_1prvx")]
-position = Vector2(1195, 217)
 
 [editable path="Teleports/Transporter_E"]

@@ -43,6 +43,8 @@ var idle_time = 0.0
 var in_group_player = false
 var hearts_container
 
+var mobs_in_attack_area = [] # Список мобов в зоне атаки
+
 func _ready():	
 	if is_in_group("player"):
 		in_group_player = true
@@ -134,7 +136,7 @@ func hero_movement(delta):
 	
 	## Проверяем атаку
 	if Input.is_action_pressed("attack"):
-		is_attacking = true		
+		is_attacking = true
 		connect("attack_finished", Callable(self, "_on_animation_finished()"))
 		disconnect("attack_finished", Callable(self, "_on_animation_finished()"))
 
@@ -268,8 +270,8 @@ func _on_death_finished(): # Обработчик сигнала
 
 func _update_attack_area():
 	# Определяем точки треугольника
-	var size_1 = 20  # Размер треугольника
-	var size_2 = 20  # Размер треугольника
+	var size_1 = 30  # Размер треугольника
+	var size_2 = 30  # Размер треугольника
 	var points = [
 		Vector2(0, 0),
 		Vector2(size_1, size_2),
@@ -297,15 +299,9 @@ func get_direction_angle():
 		return 0
 
 func _on_attack_area_body_entered(body):
-	if body.is_in_group("mob"):
+	if body.is_in_group("mob") and not body.damage_applied:
 		body.take_damage(1)
+		body.damage_applied = true  # Отмечаем, что урон нанесен
 		
-func _on_mob_damage_taken(damage_amount, mob_instance):
-	print("Мобу нанесли урон в размере:", damage_amount)
-	 # Обновите значение current_health моба, который получил урон
-	mob_instance.current_health -= damage_amount 
-	if mob_instance.current_health <= 0:
-		print("Моб умер!")
-		# Например, вызовите анимацию смерти
-		mob_instance.anim.play("Die") 
-		mob_instance.queue_free()
+		
+
