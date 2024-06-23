@@ -54,7 +54,7 @@ signal damage_taken(damage_amount, mob_instance)
 func _ready():
 	add_to_group("mob")
 	anim.animation_finished.connect(_on_explosion_animation_finished)
-	anim.animation_finished.connect(_on_animation_finished)
+	#anim.animation_finished.connect(_on_animation_finished)
 	anim.frame_changed.connect(_on_frame_changed)
 
 func _physics_process(delta):
@@ -62,7 +62,7 @@ func _physics_process(delta):
 	standing_timer += delta
 	walking_timer += delta
 	explosion_delay_timer += delta
-	if current_health == 0: 
+	if current_health == 0 and state != EXPLODING: 
 		anim.play("Die")
 		if anim.frame == 7:
 			queue_free()
@@ -172,8 +172,7 @@ func _on_detected_body_entered(body):
 		state = CHASING
 
 func _on_detected_body_exited(body):
-	# Reset the enemy
-	 
+		# Reset the enemy	 
 	enemy = null
 	
 func _on_explosion_animation_finished():
@@ -193,20 +192,20 @@ func _on_frame_changed():
 func take_damage(damage: int):
 	print("Моб получил урон:", damage)
 	current_health -= damage
-	if current_health <= 0:
-		state = STANDING
-		anim.play("Die")  # Анимация смерти
-		return  # Выходим, чтобы не запускать анимацию урона
-	else:
-		# Запускаем анимацию урона
-		var hurt_animation = "Hurt_" + current_dir
-		anim.play(hurt_animation)  # Анимация урона
-		emit_signal("damage_taken", damage, self)
+	#if current_health <= 0:
+		#state = STANDING
+		#anim.play("Die")  # Анимация смерти
+		#return  # Выходим, чтобы не запускать анимацию урона
+	#else:
+		## Запускаем анимацию урона
+		#var hurt_animation = "Hurt_" + current_dir
+		#anim.play(hurt_animation)  # Анимация урона
+		#emit_signal("damage_taken", damage, self)
 
 
-func _on_animation_finished():
-	if anim.animation == "Die": 
-		queue_free()
-	elif anim.animation == "Hurt_" + current_dir: 
-		# После анимации урона, переключитесь на анимацию ожидания
-		anim.play("Idle_" + current_dir)
+#func _on_animation_finished():
+	#if anim.animation == "Die": 
+		#queue_free()
+	#elif anim.animation == "Hurt_" + current_dir: 
+		## После анимации урона, переключитесь на анимацию ожидания
+		#anim.play("Idle_" + current_dir)

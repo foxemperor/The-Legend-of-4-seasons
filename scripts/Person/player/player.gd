@@ -17,11 +17,11 @@ signal attack_finished
 @onready var game_over = $CanvasLayer/GameOver
 
 
-@export var max_health = 2
+@export var max_health = 3
 @onready var current_health: int = max_health
 
-@onready var explosion_radius = 50 # Пример
-@onready var explosion_damage = 1 # Пример
+@onready var explosion_radius = 100 # Пример
+@onready var explosion_damage = 1 # Примерs
 
 @onready var attack_area = $AttackArea as Area2D
 @onready var triangle_collision = $AttackArea/TriangleCollisionShape2D as CollisionShape2D
@@ -270,8 +270,8 @@ func _on_death_finished(): # Обработчик сигнала
 
 func _update_attack_area():
 	# Определяем точки треугольника
-	var size_1 = 30  # Размер треугольника
-	var size_2 = 30  # Размер треугольника
+	var size_1 = 20  # Размер треугольника
+	var size_2 = 20  # Размер треугольника
 	var points = [
 		Vector2(0, 0),
 		Vector2(size_1, size_2),

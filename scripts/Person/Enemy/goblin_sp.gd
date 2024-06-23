@@ -39,6 +39,10 @@ var walking_timer = 0.0
 
 @onready var anim = $AnimatedSprite2D
 
+var current_health = 1 #  Хп моба
+var damage = 1 # Урон
+var damage_applied = false
+
 func _ready():
 	add_to_group("mob")
 
@@ -46,6 +50,12 @@ func _physics_process(delta):
 	# Обновляем таймеры
 	standing_timer += delta
 	walking_timer += delta
+	
+	if current_health <= 0:
+		await get_tree().create_timer(1.0).timeout
+		anim.play("Die_" + current_dir)
+		if anim.frame == 3:
+			queue_free()
 
 	# Машина состояний
 	match state:
@@ -150,3 +160,8 @@ func _on_detected_body_exited(body):
 	#print("Body exited!")
 	enemy = null
 
+func take_damage(damage: int):
+	if damage_applied == false:
+		damage_applied = true
+		print("Моб получил урон:", damage)
+		current_health -= damage

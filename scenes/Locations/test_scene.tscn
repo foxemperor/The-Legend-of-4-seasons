@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://gpg6gw2ft18d"]
+[gd_scene load_steps=24 format=3 uid="uid://gpg6gw2ft18d"]
 
 [ext_resource type="Texture2D" uid="uid://bkltsxtqtf0f5" path="res://assets/Landscapes/Forest/Summer/(summer) cat tails and lily pads tileset.png" id="1_xr1eu"]
 [ext_resource type="Texture2D" uid="uid://qq0qyv203mny" path="res://assets/Landscapes/Forest/Summer/(summer) cobblestone tileset.png" id="2_n04o5"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bq2ypy1m8gxim" path="res://assets/Landscapes/Forest/Summer/summer water sparkles B 16x16.png" id="6_0my43"]
 [ext_resource type="Texture2D" uid="uid://dmom8bjgai8ud" path="res://assets/Landscapes/Forest/Summer/summer waterfall B 16x16.png" id="7_yjx4b"]
 [ext_resource type="PackedScene" uid="uid://bpvj07qhw1d3a" path="res://scenes/Object/bigbox.tscn" id="8_1prvx"]
-[ext_resource type="PackedScene" uid="uid://coee2awbpsl4k" path="res://scenes/Person/Enemy/goblin_sp.tscn" id="9_beop6"]
 [ext_resource type="PackedScene" uid="uid://c1kklxo65rfdd" path="res://scenes/Person/Enemy/chomb_b.tscn" id="10_ndlvd"]
 [ext_resource type="PackedScene" uid="uid://bvv1rjsjwjpdx" path="res://scenes/Person/Enemy/goblin.tscn" id="11_8qmnj"]
 [ext_resource type="PackedScene" uid="uid://b438gm1iq1lj2" path="res://scenes/Person/Player/player.tscn" id="12_eesrf"]
@@ -35,6 +34,7 @@ func _ready():
 	print(\"Signal 'health_changed' connected\")
 
 func _on_level_spawn(destination_tag: String):
+	hearts_container.update_hearts(player.current_health-1)
 	var teleport_path = \"Teleports/Transporter_\" + destination_tag
 	var teleport = get_node(teleport_path) as Transporter
 	NavigationManager.trigger_player_spawn(teleport.spawn.global_position, teleport.spawn_direction)
@@ -1108,40 +1108,28 @@ layer_5/tile_data = PackedInt32Array(-327591, 196611, 14, -262055, 196611, 14, -
 position = Vector2(1471, -57.0794)
 scale = Vector2(1, 0.761058)
 
-[node name="Goblin Spear" parent="TileMap" instance=ExtResource("9_beop6")]
-position = Vector2(802, 36.5308)
+[node name="Chom Bombs B" parent="TileMap" instance=ExtResource("10_ndlvd")]
+position = Vector2(1389, -89.0438)
 scale = Vector2(1, 0.761058)
 
-[node name="Chom Bombs B" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(1056, 92.8491)
+[node name="Chom Bombs B2" parent="TileMap" instance=ExtResource("10_ndlvd")]
+position = Vector2(954, 213.857)
 scale = Vector2(1, 0.761058)
 
 [node name="Goblin" parent="TileMap" instance=ExtResource("11_8qmnj")]
-position = Vector2(1214, 14.4601)
+position = Vector2(1187, -152.212)
 scale = Vector2(1, 0.761058)
 
 [node name="Goblin3" parent="TileMap" instance=ExtResource("11_8qmnj")]
-position = Vector2(1073, -109.592)
+position = Vector2(1229, -11.4158)
+scale = Vector2(1, 0.761058)
+
+[node name="Goblin4" parent="TileMap" instance=ExtResource("11_8qmnj")]
+position = Vector2(676, -66.212)
 scale = Vector2(1, 0.761058)
 
 [node name="Player" parent="TileMap" instance=ExtResource("12_eesrf")]
 position = Vector2(1050, -31.9644)
-
-[node name="Chom Bombs B2" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(713, -136.229)
-scale = Vector2(1, 0.761058)
-
-[node name="Chom Bombs B3" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(902, 98.9376)
-scale = Vector2(1, 0.761058)
-
-[node name="Chom Bombs B4" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(851, -140.035)
-scale = Vector2(1, 0.761058)
-
-[node name="Chom Bombs B5" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(717, -41.0971)
-scale = Vector2(1, 0.761058)
 
 [node name="Box2" parent="TileMap" instance=ExtResource("8_1prvx")]
 position = Vector2(1512, -31.2034)
@@ -1165,10 +1153,10 @@ destination_transporter_tag = "W"
 spawn_direction = "left"
 
 [node name="CollisionShape2D" parent="Teleports/Transporter_E" index="0"]
-position = Vector2(-267, -390)
+position = Vector2(69, -257)
 
 [node name="Spawn" parent="Teleports/Transporter_E" index="1"]
-position = Vector2(-302, -391)
+position = Vector2(34, -254)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 scale = Vector2(5, 5)

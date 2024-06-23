@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://byli0j2xukfg7"]
+[gd_scene load_steps=24 format=3 uid="uid://byli0j2xukfg7"]
 
 [ext_resource type="PackedScene" uid="uid://b438gm1iq1lj2" path="res://scenes/Person/Player/player.tscn" id="1_jkr31"]
 [ext_resource type="Script" path="res://scripts/Locations/world_a_1_s.gd" id="1_x7r5j"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bq2ypy1m8gxim" path="res://assets/Landscapes/Forest/Summer/summer water sparkles B 16x16.png" id="8_papci"]
 [ext_resource type="Texture2D" uid="uid://dmom8bjgai8ud" path="res://assets/Landscapes/Forest/Summer/summer waterfall B 16x16.png" id="9_pij86"]
 [ext_resource type="AudioStream" uid="uid://c2mj8b444wtol" path="res://audio/music/Journey Across the Blue.ogg" id="10_gq4tl"]
+[ext_resource type="PackedScene" uid="uid://c1kklxo65rfdd" path="res://scenes/Person/Enemy/chomb_b.tscn" id="11_ai3i5"]
 [ext_resource type="PackedScene" uid="uid://bbohtj8uxu10u" path="res://scenes/UI/transporter.tscn" id="12_2pol3"]
 [ext_resource type="PackedScene" uid="uid://cwpg1w4j2sc6d" path="res://scenes/UI/healthbar/hearts_container.tscn" id="13_cvwbe"]
 
@@ -45,6 +46,7 @@ texture = ExtResource("2_3i1l4")
 11:0/0/y_sort_origin = 30
 11:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:0/0/physics_layer_0/angular_velocity = 0.0
+11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 40, 8, 40, 14, 48, 8, 50, -8, 50, -14, 48)
 0:1/0 = 0
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
@@ -72,6 +74,7 @@ texture = ExtResource("2_3i1l4")
 10:1/0 = 0
 10:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:1/0/physics_layer_0/angular_velocity = 0.0
+10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 6, 4, -2, -4, -8, -4, -2, 4, 0, 8)
 0:2/0 = 0
 0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:2/0/physics_layer_0/angular_velocity = 0.0
@@ -117,6 +120,7 @@ texture = ExtResource("2_3i1l4")
 10:3/0 = 0
 10:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:3/0/physics_layer_0/angular_velocity = 0.0
+10:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 8, -8, 2, -8, -8, 2, -8, 8)
 0:4/0 = 0
 0:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:4/0/physics_layer_0/angular_velocity = 0.0
@@ -150,6 +154,7 @@ texture = ExtResource("2_3i1l4")
 10:4/0 = 0
 10:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:4/0/physics_layer_0/angular_velocity = 0.0
+10:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 4, -2, 4, 0, 8, 6, 8, 8, -8, 8, -8, -8)
 0:5/0 = 0
 0:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:5/0/physics_layer_0/angular_velocity = 0.0
@@ -183,6 +188,7 @@ texture = ExtResource("2_3i1l4")
 10:5/0 = 0
 10:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:5/0/physics_layer_0/angular_velocity = 0.0
+10:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 4, -2, 4, 2, 8, 8, -8, 8, -8, -8, 8, -8)
 0:6/0 = 0
 0:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:6/0/physics_layer_0/angular_velocity = 0.0
@@ -216,6 +222,7 @@ texture = ExtResource("2_3i1l4")
 10:6/0 = 0
 10:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:6/0/physics_layer_0/angular_velocity = 0.0
+10:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 5, -1, -2, 3, -8, 5, -8, -8)
 0:7/0 = 0
 0:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:7/0/physics_layer_0/angular_velocity = 0.0
@@ -600,6 +607,7 @@ texture = ExtResource("2_3i1l4")
 10:2/0 = 0
 10:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:2/0/physics_layer_0/angular_velocity = 0.0
+10:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, 0, 8, 0, -8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s453w"]
 texture = ExtResource("3_s3acg")
@@ -5144,6 +5152,9 @@ layer_2/tile_data = PackedInt32Array(1572921, 720896, 0, 1376290, 720896, 0, 137
 
 [node name="Player" parent="TileMap" instance=ExtResource("1_jkr31")]
 position = Vector2(210, 440)
+
+[node name="Chom Bombs B" parent="TileMap" instance=ExtResource("11_ai3i5")]
+position = Vector2(125, 490)
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_gq4tl")

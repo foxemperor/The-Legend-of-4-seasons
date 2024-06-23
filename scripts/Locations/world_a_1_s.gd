@@ -5,6 +5,7 @@ extends Node2D
 
 func _ready():
 	hearts_container.set_max_hearts(player.max_health)
+	player.current_health = player.current_health-1
 	hearts_container.update_hearts(player.current_health)
 	player.health_changed.connect(hearts_container.update_hearts)
 	
