@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://byli0j2xukfg7"]
+[gd_scene load_steps=25 format=3 uid="uid://byli0j2xukfg7"]
 
 [ext_resource type="PackedScene" uid="uid://b438gm1iq1lj2" path="res://scenes/Person/Player/player.tscn" id="1_jkr31"]
 [ext_resource type="Script" path="res://scripts/Locations/world_a_1_s.gd" id="1_x7r5j"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://c2mj8b444wtol" path="res://audio/music/Journey Across the Blue.ogg" id="10_gq4tl"]
 [ext_resource type="PackedScene" uid="uid://c1kklxo65rfdd" path="res://scenes/Person/Enemy/chomb_b.tscn" id="11_ai3i5"]
 [ext_resource type="PackedScene" uid="uid://bbohtj8uxu10u" path="res://scenes/UI/transporter.tscn" id="12_2pol3"]
+[ext_resource type="PackedScene" uid="uid://bvv1rjsjwjpdx" path="res://scenes/Person/Enemy/goblin.tscn" id="12_kgops"]
 [ext_resource type="PackedScene" uid="uid://cwpg1w4j2sc6d" path="res://scenes/UI/healthbar/hearts_container.tscn" id="13_cvwbe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6ojqa"]
@@ -286,6 +287,7 @@ texture = ExtResource("2_3i1l4")
 4:8/0 = 0
 4:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:8/0/physics_layer_0/angular_velocity = 0.0
+4:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, -8, 2, -2, 6, 4, 6, 6, 2, 4, -4, 0, -8, -4, -8)
 5:8/0 = 0
 5:8/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:8/0/physics_layer_0/angular_velocity = 0.0
@@ -334,6 +336,7 @@ texture = ExtResource("2_3i1l4")
 4:9/0 = 0
 4:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:9/0/physics_layer_0/angular_velocity = 0.0
+4:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, 0, -6, 4, -2, 8, 4, 8, 8, 4, 8, 0, 6, -6, 0, -6)
 5:9/0 = 0
 5:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:9/0/physics_layer_0/angular_velocity = 0.0
@@ -574,9 +577,11 @@ texture = ExtResource("2_3i1l4")
 3:15/0 = 0
 3:15/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:15/0/physics_layer_0/angular_velocity = 0.0
+3:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, 0, 4, -6, -4, -6, -8, 8, -8)
 4:15/0 = 0
 4:15/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:15/0/physics_layer_0/angular_velocity = 0.0
+4:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, 0, 4, 6, -2, 4, -8, -8, -8)
 6:15/0 = 0
 6:15/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:15/0/physics_layer_0/angular_velocity = 0.0
@@ -5155,6 +5160,13 @@ position = Vector2(210, 440)
 
 [node name="Chom Bombs B" parent="TileMap" instance=ExtResource("11_ai3i5")]
 position = Vector2(125, 490)
+
+[node name="Goblin" parent="TileMap" instance=ExtResource("12_kgops")]
+position = Vector2(273, 458)
+current_health = 2
+
+[node name="Chom Bombs B2" parent="TileMap" instance=ExtResource("11_ai3i5")]
+position = Vector2(145, 419)
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_gq4tl")

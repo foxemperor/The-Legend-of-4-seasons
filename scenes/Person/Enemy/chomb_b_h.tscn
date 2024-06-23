@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://0ks3h0wsmdqv"]
+[gd_scene load_steps=125 format=3 uid="uid://hnl3diispusv"]
 
 [ext_resource type="Script" path="res://scripts/Person/Enemy/chomb.gd" id="1_c10ao"]
 [ext_resource type="Texture2D" uid="uid://t6np62v5j3u8" path="res://assets/Creatures/Rootbomb/Winter/chomp_attack.png" id="2_fsas2"]

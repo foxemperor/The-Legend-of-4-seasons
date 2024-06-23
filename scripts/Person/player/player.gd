@@ -20,8 +20,8 @@ signal attack_finished
 @export var max_health = 3
 @onready var current_health: int = max_health
 
-@onready var explosion_radius = 100 # Пример
-@onready var explosion_damage = 1 # Примерs
+@onready var explosion_radius = 200 
+@onready var explosion_damage = 1 
 
 @onready var attack_area = $AttackArea as Area2D
 @onready var triangle_collision = $AttackArea/TriangleCollisionShape2D as CollisionShape2D
@@ -71,7 +71,7 @@ func _physics_process(delta):
 			if mob.has_method("get_tree") and mob.anim is Node: # Проверка, есть ли у mob метод get_tree
 				if mob.anim.frame == 8 and mob.state == mob.EXPLODING and not mob.damage_applied:  # Проверяем, взрывается ли моб
 					var distance = global_position.distance_to(mob.global_position)
-					if distance < explosion_radius:
+					if distance <= explosion_radius:
 						take_damage(1)
 						mob.damage_applied = true
 						break  # Выходим из цикла, если урон уже нанесен

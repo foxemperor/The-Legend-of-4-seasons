@@ -1109,7 +1109,7 @@ position = Vector2(1471, -57.0794)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B" parent="TileMap" instance=ExtResource("10_ndlvd")]
-position = Vector2(1389, -89.0438)
+position = Vector2(1364, -65.451)
 scale = Vector2(1, 0.761058)
 
 [node name="Chom Bombs B2" parent="TileMap" instance=ExtResource("10_ndlvd")]
@@ -1117,7 +1117,7 @@ position = Vector2(954, 213.857)
 scale = Vector2(1, 0.761058)
 
 [node name="Goblin" parent="TileMap" instance=ExtResource("11_8qmnj")]
-position = Vector2(1187, -152.212)
+position = Vector2(757, -143.84)
 scale = Vector2(1, 0.761058)
 
 [node name="Goblin3" parent="TileMap" instance=ExtResource("11_8qmnj")]

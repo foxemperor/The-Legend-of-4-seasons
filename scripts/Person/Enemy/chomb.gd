@@ -45,7 +45,7 @@ var damage_applied = false # Флаг для блокировки повторн
 @onready var anim = $AnimatedSprite2D
 @onready var health = get_node("AnimatedSprite2D").get_parent()
 
-var current_health = 1 #  Хп моба
+@export var current_health = 1 #  Хп моба
 var damage = 1 # Урон
 
 signal exploded(explosion_position)
@@ -62,7 +62,8 @@ func _physics_process(delta):
 	standing_timer += delta
 	walking_timer += delta
 	explosion_delay_timer += delta
-	if current_health == 0 and state != EXPLODING: 
+	if current_health <= 0 and state != EXPLODING: 
+		await get_tree().create_timer(0.5).timeout
 		anim.play("Die")
 		if anim.frame == 7:
 			queue_free()

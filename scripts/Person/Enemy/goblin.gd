@@ -40,7 +40,7 @@ var walking_timer = 0.0
 @onready var anim = $AnimatedSprite2D
 @onready var health = get_node("AnimatedSprite2D").get_parent()
 
-var current_health = 1 #  Хп моба
+@export var current_health = 1 #  Хп моба
 var damage = 1 # Урон
 var damage_applied = false
 
@@ -52,7 +52,7 @@ func _physics_process(delta):
 	standing_timer += delta
 	walking_timer += delta
 	if current_health <= 0:
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.5).timeout
 		anim.play("Die_" + current_dir)
 		if anim.frame == 3:
 			queue_free()

@@ -2385,6 +2385,7 @@ scale = Vector2(1.5, 1.5)
 [node name="Chom Bombs B" parent="TileMap" instance=ExtResource("9_u85j8")]
 position = Vector2(447.875, 379.419)
 scale = Vector2(1.566, 1.47062)
+current_health = 2
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_b4ivn")
